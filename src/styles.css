@@ -1,1 +1,183 @@
+/* @import "~bootstrap/dist/css/bootstrap.css"; */
 /* You can add global styles to this file, and also import other style files */
+/* @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Courgette&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Source+Sans+Pro:wght@300&family=Tai+Heritage+Pro&display=swap');
+
+@import '~ngx-toastr/toastr.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/* @import 'material-icons/iconfont/material-icons.css'; */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+body{
+    font-family: 'Inconsolata', monospace;
+font-family: 'Source Sans Pro', sans-serif;
+font-family: 'Tai Heritage Pro', serif;
+
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*{
+    font-size: 1000px9;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+.cssload-container {
+  position: fixed;
+  width: 100%;
+  left: 25%;
+  right: 0;
+  top: 10%;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
+@media only screen and (max-width: 720px) {
+  .cssload-container {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 5%;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+  }
+}
+.cssload-speeding-wheel {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 35%;
+  top: 40%;
+  width: 93px;
+  height: 93px;
+  margin: 0 auto;
+  border: 4px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: cssload-spin 500ms infinite linear;
+  -o-animation: cssload-spin 500ms infinite linear;
+  -ms-animation: cssload-spin 500ms infinite linear;
+  -webkit-animation: cssload-spin 500ms infinite linear;
+  -moz-animation: cssload-spin 500ms infinite linear;
+}
+
+@keyframes cssload-spin {
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes cssload-spin {
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes cssload-spin {
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes cssload-spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes cssload-spin {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+table{
+  width: 100% !important;
+  overflow-x: auto;
+}
+
+.mat-elevation-z8 {    
+  overflow-x: auto;
+  overflow-x: auto;
+ }
+
+ @media (max-width: 768px) {
+  .mat-table[matTableResponsive] .mat-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .mat-table[matTableResponsive] .mat-header-row th.mat-header-cell {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    justify-content: space-around;
+  }
+  .mat-table[matTableResponsive] .mat-header-row th.mat-header-cell > .mat-sort-header-container {
+    padding-left: 15px;
+  }
+  .mat-table[matTableResponsive] .mat-header-row th.mat-header-cell:not([mat-sort-header]), .mat-table[matTableResponsive] .mat-header-row th.mat-header-cell.mat-sort-header-disabled, .mat-table[matTableResponsive] .mat-header-row th.mat-header-cell.mat-column-actions {
+    display: none;
+  }
+  .mat-table[matTableResponsive] .mat-row {
+    height: auto;
+  }
+  .mat-table[matTableResponsive] .mat-row td.mat-cell:not(.mat-column-actions) {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 0.5rem;
+    text-align: right;
+    word-break: break-word;
+  }
+  .mat-table[matTableResponsive] .mat-row td.mat-cell:not(.mat-column-actions) > * {
+    grid-column: 2;
+  }
+  .mat-table[matTableResponsive] .mat-row td.mat-cell:not(.mat-column-actions):before {
+    content: attr(data-column-name);
+    text-align: left;
+  }
+  .mat-table[matTableResponsive] .mat-row td.mat-column-actions {
+    display: flex;
+    justify-content: center;
+    padding: 0 0.5rem;
+  }
+  .mat-table[matTableResponsive] .mat-row td.mat-column-actions > button {
+    margin: 0.5rem 0;
+  }
+  .mat-table[matTableResponsive] .mat-row:last-of-type td:last-of-type {
+    border: none;
+  }
+  .mat-table[matTableResponsive] .mat-row:not(:last-of-type) td:last-of-type {
+    border-bottom: 0.5rem solid #fafafa;
+  }
+  .mat-card .mat-table[matTableResponsive],
+.mat-expansion-panel .mat-table[matTableResponsive] {
+    border: 0.5rem solid #fafafa;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  text-align: right;
+}
+   
