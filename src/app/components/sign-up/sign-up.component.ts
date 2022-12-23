@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
-  Roles: any = ['Admin', 'Partner', 'Volunteer'];
+  Roles: any = ['Admin', 'Patient', 'professional'];
   hide = true;
   form: any = {
     username: null,
@@ -45,7 +45,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let { username, email, phone, is_admin, is_partner, is_volunteer, role, password } =
+    let { username, email, phone, is_admin, is_partner, is_professional, role, password } =
       this.form;
       console.log(this.form)
 
