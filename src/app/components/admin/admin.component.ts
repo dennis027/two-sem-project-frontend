@@ -11,6 +11,7 @@ import { DiagnosisService } from 'src/app/services/diagnosis.service';
 import { RecommendationsService } from 'src/app/services/recommendations.service';
 import { ApproveService } from 'src/app/services/approve.service';
 import { TestimoniesService } from 'src/app/services/testimonies.service';
+import { ContactService } from 'src/app/services/contact.service';
 declare function mergeById(questions:any,answers:any):any
 declare function mergediag(diagnosis:any,recommendation:any):any
 declare function mergeByTesti(diagnosis:any,recommendation:any):any
@@ -31,6 +32,7 @@ export class AdminComponent implements OnInit {
   diagnosis:any
   testimony:any
   approve:any
+  contact:any
   
   constructor( private questionService: QuestionsService,
      private answersService:AnswersService,
@@ -38,6 +40,7 @@ export class AdminComponent implements OnInit {
      private recommendationService:RecommendationsService,
      private approveService:ApproveService,
      private testimonyService:TestimoniesService,
+     private contactService:ContactService,
      
      ) { }
 
@@ -87,6 +90,11 @@ export class AdminComponent implements OnInit {
       console.log(tres) 
 
     })
+
+   this.contactService.getContact().subscribe((res:any[])=>{
+      this.contact=res
+      console.table(this.contact)
+   })
 
 
   }
