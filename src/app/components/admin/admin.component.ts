@@ -33,6 +33,10 @@ export class AdminComponent implements OnInit {
   testimony:any
   approve:any
   contact:any
+  username: any;
+  uniqueDiagnosis:any
+
+  user_id: any
   
   constructor( private questionService: QuestionsService,
      private answersService:AnswersService,
@@ -45,6 +49,10 @@ export class AdminComponent implements OnInit {
      ) { }
 
   ngOnInit(): void {
+
+    this.username = localStorage.getItem('username')
+    this.user_id = localStorage.getItem('user_id')
+    console.log(this.username)
     // mergeById(Array,Array)
     this.questionService.getQuestions().subscribe((res: any[]) => {
       this.questions = res;
@@ -63,7 +71,8 @@ export class AdminComponent implements OnInit {
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
       console.log(this.diagnosis)    
-     
+      this.uniqueDiagnosis = this.diagnosis.filter((id:any) => id.user == this.user_id)
+      console.log(this.uniqueDiagnosis)
       })
 
 
