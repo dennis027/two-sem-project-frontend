@@ -34,7 +34,7 @@ let studentDetails = [
 
 let studentMark = [
   {
-    // "id": 1,
+    "id": 1,
     "question_id": 1,
     "user": 4,
     "answer_subject": "we can work",
@@ -42,7 +42,7 @@ let studentMark = [
     "answer_date": "2022-12-30T03:00:00+03:00"
 },
 {
-    // "id": 2,
+    "id": 2,
     "question_id": 2,
     "user": 4,
     "answer_subject": "eddie fights",
@@ -50,7 +50,7 @@ let studentMark = [
     "answer_date": "2022-12-21T03:00:00+03:00"
 },
 {
-    // "id": 3,
+    "id": 3,
     "question_id": 3,
     "user": 3,
     "answer_subject": "let me test this",
@@ -81,7 +81,7 @@ export class AdminComponent implements OnInit {
       this.answers=res;
       console.log(this.answers)
    
-        let result = mergeById( studentDetails, studentMark);
+        let result = mergeById( this.questions, this.answers);
   
         console.log(result)
     
