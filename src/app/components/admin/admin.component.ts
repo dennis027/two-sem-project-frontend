@@ -9,8 +9,11 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { AnswersService } from 'src/app/services/answers.service';
 import { DiagnosisService } from 'src/app/services/diagnosis.service';
 import { RecommendationsService } from 'src/app/services/recommendations.service';
+import { ApproveService } from 'src/app/services/approve.service';
+import { TestimoniesService } from 'src/app/services/testimonies.service';
 declare function mergeById(questions:any,answers:any):any
 declare function mergediag(diagnosis:any,recommendation:any):any
+declare function mergeByTesti(diagnosis:any,recommendation:any):any
 
 
 
@@ -26,8 +29,17 @@ export class AdminComponent implements OnInit {
   rese:any
   recommendation:any
   diagnosis:any
+  testimony:any
+  approve:any
   
-  constructor( private questionService: QuestionsService, private answersService:AnswersService,private diagnosisService:DiagnosisService,private recommendationService:RecommendationsService) { }
+  constructor( private questionService: QuestionsService,
+     private answersService:AnswersService,
+     private diagnosisService:DiagnosisService,
+     private recommendationService:RecommendationsService,
+     private approveService:ApproveService,
+     private testimonyService:TestimoniesService,
+     
+     ) { }
 
   ngOnInit(): void {
     // mergeById(Array,Array)
@@ -44,21 +56,38 @@ export class AdminComponent implements OnInit {
         console.log(result)
     
     })
+
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
-      console.log(this.diagnosis)      
+      console.log(this.diagnosis)    
+     
       })
 
 
     this.recommendationService.getRecommendations().subscribe((res:any[])=>{
       this.recommendation=res
       console.log(this.recommendation)
-         
-    let test =mergediag(   this.diagnosis,this.recommendation,  );
+      let resed =mergediag(   this.diagnosis ,this.recommendation  );
 
-    console.log(test)
+      console.log(resed)
+ 
     })
  
+    
+    this.testimonyService.getTestimonies().subscribe((res:any[])=>{
+      this.testimony=res
+      console.log(this.testimony)
+
+    })
+    this.approveService.getApproval().subscribe((res:any[])=>{
+      this.approve=res
+      console.log(this.approve)
+      let tres =mergeByTesti(   this.testimony,this.approve  );
+
+      console.log(tres) 
+
+    })
+
 
   }
 
