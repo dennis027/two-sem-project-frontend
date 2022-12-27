@@ -6,19 +6,28 @@ var studentDetails = [
   ];
   
   var studentMark = [
-    { question_id: 1, mark1: 180, mark2: 90, mark3: 100 },
-    { question_id: 2, mark1: 80, mark2: 190, mark3: 100 },
-    { question_id: 3, mark1: 80, mark2: 90, mark3: 1100 },
-    { question_id: 4, mark1: 80, mark2: 9011, mark3: 100 },
+    { diagnosis_id: 1, mark1: 180, mark2: 90, mark3: 100 },
+    { diagnosis_id: 2, mark1: 80, mark2: 190, mark3: 100 },
+    { diagnosis_id: 3, mark1: 80, mark2: 90, mark3: 1100 },
+    { diagnosis_id: 4, mark1: 80, mark2: 9011, mark3: 100 },
   ];
+
+
 
   var mergeById = (array1, array2) =>
   array1.map(itm => ({
     ...array2.find((item) => (item.question_id === itm.id) && item),
     ...itm
   }));
-    // let result = mergeById(studentDetails, studentMark);   
 
-    // console.log(result)  
+
+  var mergediag = (array1, array2) =>
+  array1.map(itm => ({
+    ...array2.find((item) => (item.diagnosis_id === itm.id) && item),
+    ...itm
+  }));
+    var result = mergediag(studentDetails, studentMark);   
+
+    console.log(result)  
 
     // wanja
