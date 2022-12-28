@@ -7,7 +7,7 @@
 <div class ="background">
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" >
 
-    <mat-card class="box" >
+    <mat-card >
       <mat-card-header>
         <img class="hel" src="./assets/photos/mwangaza.jpeg" alt="" width="100%">
                 
@@ -17,12 +17,14 @@
       <form class="example-form" *ngIf="!isLoggedIn" name="form"
       (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
         <mat-card-content>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="example-full-width" appearance="outline" >
+            <mat-label>Username</mat-label>
             <input matInput placeholder="Username" matInput type="text" name="username" [(ngModel)]="form.username"
             required #username="ngModel" > 
           </mat-form-field>
   
-          <mat-form-field class="example-full-width"> 
+          <mat-form-field class="example-full-width" appearance="outline"> 
+            <mat-label>Password</mat-label>
             <input matInput placeholder="Password" matInput type="password" name="password"
             [(ngModel)]="form.password" required minlength="6" #password="ngModel">
             <mat-icon matSuffix *ngIf="isCaps">eject</mat-icon>
@@ -31,7 +33,7 @@
         </mat-card-content>
         <button mat-stroked-button color="accent" class="btn-block" matInput type="submit">Log in</button>
       </form>
-      Not a member? <a href="joinus">Create account</a>
+      Not a member? <a routerLink="/sign-up">Create account</a>
     </mat-card>
   </div>
   </div>

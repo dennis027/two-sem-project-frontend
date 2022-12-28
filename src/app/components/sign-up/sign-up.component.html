@@ -2,21 +2,22 @@
 <div class="background">
     <br><br>
   <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <mat-card class="box" >
+    <mat-card  >
         <mat-card-header>
           <img class="hel" src="./assets/photos/mwangaza.jpeg" alt="" width="100%">
           
-          <mat-card-title>Partner Register</mat-card-title>
+          <mat-card-title>Create Account </mat-card-title>
         </mat-card-header>
     
         <form class="example-form" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
     
           <mat-card-content>
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Username</mat-label>
               <input matInput placeholder="Username" name="username" [(ngModel)]="form.username" #username="ngModel" matInput type="text" >
             </mat-form-field>
     
-            <mat-form-field class="example-full-width" appearance="fill" style="background-color: white;">
+            <mat-form-field class="example-full-width" appearance="outline"  style="background-color: white;">
               <mat-label>Email</mat-label>
               <input type="email" matInput [errorStateMatcher]="matcher"
                      placeholder="Ex. mwangaza@example.com"  name="email" [(ngModel)]="form.email" required
@@ -30,18 +31,21 @@
               </mat-error>
             </mat-form-field>
     
-            <mat-form-field class="example-full-width" >
+            <mat-form-field class="example-full-width" appearance="outline" >
+              <mat-label>Phone Number</mat-label>
               <input matInput placeholder="Phonenumber" matInput type="number" name="phone"
               [(ngModel)]="form.phone" required phone #phone="ngModel" >
             </mat-form-field>
   
-            <mat-form-field class="example-full-width" >
+            <mat-form-field class="example-full-width" appearance="outline" >
+              <mat-label>Password</mat-label>
               <input matInput placeholder="Password" matInput type="password" name="password" [(ngModel)]="form.password"
               required minlength="6" #password="ngModel">
               
             </mat-form-field>
   
-            <mat-form-field class="example-full-width" >
+            <mat-form-field class="example-full-width" appearance="outline" >
+              <mat-label>Confirm Password</mat-label>
               <input matInput placeholder="Confirm Password" matInput type="password">
             </mat-form-field>
     
