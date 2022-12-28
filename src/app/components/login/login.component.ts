@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service'
@@ -20,6 +20,16 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+
+  //CAPS LOCK DETECT
+  public isCaps: boolean = false;
+
+  @HostListener('window:keydown', ['$event'])
+  public onKeydown(event: KeyboardEvent): void {
+    this.isCaps = typeof event.getModifierState === 'function' && event.getModifierState('CapsLock');
+  }
+
+  //END
 
   loaderConfig:any ={
     theme:{

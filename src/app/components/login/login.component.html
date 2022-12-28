@@ -25,6 +25,8 @@
           <mat-form-field class="example-full-width"> 
             <input matInput placeholder="Password" matInput type="password" name="password"
             [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+            <mat-icon matSuffix *ngIf="isCaps">eject</mat-icon>
+            <mat-hint align="end" *ngIf="isCaps">Caps Lock is on</mat-hint>
           </mat-form-field>
         </mat-card-content>
         <button mat-stroked-button color="accent" class="btn-block" matInput type="submit">Log in</button>

@@ -14,34 +14,32 @@
               </button>
             <div fxShow="true" fxHide.lt-md="true" style="padding: 100px;" class="container-fluid" >
               <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-            
+              <a routerLink=""mat-button class="d">       
+                <mat-icon></mat-icon>
+                <b>Home</b>
+              </a>
               
-                <a href="whoweare" mat-button class="d">       
+                <a routerLink="/whoweare"mat-button class="d">       
                   <mat-icon></mat-icon>
                   <b>About Us</b>
                 </a>
-              <a href="projects" mat-button class="d">       
-                <mat-icon></mat-icon>
-                <b>Our Projects</b>
-              </a>
-              <a href="mission" mat-button class="d">       
-                <mat-icon></mat-icon>
-                <b>Mission</b>
-              </a>
-              <a href="partners" mat-button class="d">       
-                <mat-icon></mat-icon>
-                <b>Our Team</b>
-              </a>
-    
+          
+         
+     
               <!-- <a href="joinus" mat-button class="c">
                 <mat-icon></mat-icon> 
                 <b>Join Us</b>
               </a> -->
-              <a href="contact" mat-button class="b">
+              <a routerLink="/contact" mat-button class="b">
                 <mat-icon></mat-icon>
                 <b>Contacts</b>
               </a>  
-              <a href="login" mat-button class="f">
+            
+              <a routerLink="/sign-up" mat-button class="f" style="     float: right;">
+                <mat-icon></mat-icon>
+                <b>Sign-Up</b>
+              </a>
+              <a routerLink="/login" mat-button class="f" style="     float: right;">
                 <mat-icon></mat-icon>
                 <b>Login</b>
               </a>
@@ -52,19 +50,18 @@
         <div >
         <mat-sidenav-container class="custom-sidenav-container" fxFlexFill style="height: 100vh;" >
           <mat-sidenav #sidenav  >
-            
+            <a href="" mat-list-item>
+              <mat-icon></mat-icon>
+              Mission
+            </a>
            
             <mat-nav-list  >
               <a href="whoweare" mat-list-item >
                 <mat-icon></mat-icon> 
                 About Us
               </a> 
-              <a href="projects" mat-list-item>
-                <mat-icon></mat-icon>
-                Projects</a>
-                <a href="partners" mat-list-item>
-                  <mat-icon></mat-icon>
-                  Our Team</a>
+       
+    
     
                 <!-- <a href="joinus" mat-list-item>
                   <mat-icon></mat-icon> 
@@ -74,10 +71,7 @@
                 <mat-icon></mat-icon>
                 Contacts
               </a>
-              <a href="mission" mat-list-item>
-                <mat-icon></mat-icon>
-                Mission
-              </a>
+         
             
     
               <a href="login" mat-list-item>
