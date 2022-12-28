@@ -86,7 +86,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { ContactComponent } from './contact/contact.component';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 
 
