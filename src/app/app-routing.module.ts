@@ -9,7 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ContactComponent } from './contact/contact.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},

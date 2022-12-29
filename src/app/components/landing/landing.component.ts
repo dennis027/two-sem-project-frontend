@@ -76,7 +76,7 @@ export class LandingComponent implements OnInit {
     },
     {
       title: 'Sober Space',
-      img: './assets/photos/addict.jpg'
+      img: './assets/photos/addictiontech.webp'
     },
     // {
     //   title: 'Sober Space',
