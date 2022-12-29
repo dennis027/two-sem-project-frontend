@@ -13,13 +13,13 @@
                  
                 <mat-form-field class="example-full-width" style="width:100% !important; "  appearance="outline">
                     <mat-label>Name</mat-label>
-                <input matInput placeholder="Your Name" name="name" [(ngModel)]="form.name" #name="ngModel" matInput type="text" >
+                <input matInput placeholder="Your Name" name="name" [(ngModel)]="data.name" #name="ngModel" matInput type="text" >
                 </mat-form-field>
                  <br> <br>
                  <mat-form-field class="example-full-width" appearance="outline" style="width:100% !important; " >
                   <mat-label>Email</mat-label>
                   <input type="email" matInput [errorStateMatcher]="matcher"
-                         placeholder="Ex. mwangaza@example.com"  name="email" [(ngModel)]="form.email" required
+                         placeholder="Ex. mwangaza@example.com"  name="email" [(ngModel)]="data.email" required
                          email #email="ngModel" >
                
                   <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -32,19 +32,19 @@
                 <br> <br>
                 <mat-form-field class="example-full-width" style="width:100% !important; " appearance="outline" >
                     <mat-label>Subject</mat-label>
-                  <input matInput placeholder="Subject" name="subject" [(ngModel)]="form.subject" #subject="ngModel" matInput type="text" >
+                  <input matInput placeholder="Subject" name="subject" [(ngModel)]="data.subject" #subject="ngModel" matInput type="text" >
                 </mat-form-field>
                 <br> <br>
                 <mat-form-field class="example-full-width" style="width:100% !important; "  appearance="outline" id="box">
                     <mat-label>Message To Sober Space</mat-label>
-                  <textarea matInput placeholder="Message to Sober Space" name="message" [(ngModel)]="form.message" #message="ngModel" matInput type="textarea" style="height:200px !important;"></textarea>
+                  <textarea matInput placeholder="Message to Sober Space" name="message" [(ngModel)]="data.message" #message="ngModel" matInput type="textarea" style="height:200px !important;"></textarea>
                 </mat-form-field>
                 
                      
                 
                     <br> <br><br>
-                
-                    <button mat-stroked-button color="primary" style="color: rgb(14, 18, 235) !important;" matInput type="submit">Send Message</button>
+                    <button *ngIf="!loader" mat-raised-button color="primary" matInput type="submit">Send Message</button>
+                    <button *ngIf="loader" mat-stroked-button color="primary" matInput type="submit">Sending Message ...</button>
                    <br><br>
                   </form>
                 

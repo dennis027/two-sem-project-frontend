@@ -1,11 +1,12 @@
 
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service'
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import {NgxLoaderService} from '@binssoft/ngx-loader'
 import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loader:boolean = false
+  // @ViewChild('formPrimary') form11!:NgForm //form primary data declaration
+  hide = true;
   title = 'toaster-not';
   form:any;
   isLoggedIn = false;
@@ -62,7 +65,9 @@ export class LoginComponent implements OnInit {
     } 
   }
   onSubmit() {
+    this.loader=true
     this.authService.login(this.form).subscribe((res: any) => {
+      this.loader=false
       console.log(res)
       localStorage.setItem('accessToken', res['token'])
       localStorage.setItem('username', res['username'])
@@ -83,6 +88,7 @@ export class LoginComponent implements OnInit {
       this.toastr.success('Logged in successfully.Welcome to Sober Space.');
 
     }, error => {
+      this.loader=false
       this.toastr.error('Kindly provide the correct credentials');
     })
    

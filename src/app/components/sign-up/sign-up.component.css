@@ -7,7 +7,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  min-height: 100vh;
+  min-height: 100%;
   background: #e2e2e2;
 }
 
@@ -124,3 +124,17 @@ input.example-right-align::-webkit-inner-spin-button {
 /* input.example-right-align {
   -moz-appearance: textfield;
 } */
+
+.background{
+  background-image: url("src/assets/photos/background.jpg");
+height: auto;
+background-size: cover;
+}
+
+/* .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: yellow;
+} */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline{
+  border-radius: 1 1 1 1 !important;
+  color: rgb(56, 3, 3) !important;
+}

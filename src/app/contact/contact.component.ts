@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -22,10 +22,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  @ViewChild('f') form!:NgForm
+  loader:boolean=false
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
- form:any = {
+ data:any = {
    name:null,
    email:null,
    subject:null,
@@ -38,17 +40,24 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(): void{
-    let {name,email,subject,message}= this.form;
+    this.loader=true
+    let {name,email,subject,message}= this.data;
     this.contactService.postContact(name,email,subject,message).subscribe(
       (data) => {
+    
+        this.loader=false
+      
         console.log(data)
         this.toastr.success('Sober Space Received Your Message');
-      this.router.navigate (['contact'])
-       
+        this.form.resetForm({})
+ 
+     
       },
       (err) => {
+        this.loader=false
        console.log(err)
        this.toastr.error('Check Your Details ');
+    
       });
       // );
       // this.dialogRef.close();
