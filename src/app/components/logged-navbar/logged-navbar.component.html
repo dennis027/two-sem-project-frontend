@@ -33,8 +33,11 @@
               <a routerLink="/contact" mat-button class="b">
                 <mat-icon></mat-icon>
                 <b>Contacts</b>
-              </a>      
+              </a>    
+       
               <button mat-flat-button color="warn" (click)="SignOutDialog()" style="float: right;">Sign Out</button>
+              <span style="float: right;">Logged User     <button mat-stroked-button color="primary" type="button" >{{username ? username : "not available"}}</button> </span>
+           
             </div>
           </mat-toolbar-row>
         </mat-toolbar>
@@ -80,9 +83,10 @@
     </div>
 
     <ng-template #callAPIDialog>
-        <h2 matDialogTitle>Hello dialog!</h2>
+        <h2 matDialogTitle>Are You Sure You Want to Exit?</h2>
         <mat-dialog-actions align="end">
+          <button mat-button color="warn" matDialogClose="yes">Yes</button>
             <button mat-button matDialogClose="no">No</button>
-            <button mat-button matDialogClose="yes">Yes</button>
+        
         </mat-dialog-actions>
     </ng-template>

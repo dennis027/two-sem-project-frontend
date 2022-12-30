@@ -114,3 +114,6 @@ right: 0;
     position: fixed !important;
     height: auto;
 }
+button{
+  margin-left: 10px;
+}

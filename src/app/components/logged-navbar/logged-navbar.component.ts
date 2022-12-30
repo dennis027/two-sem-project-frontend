@@ -9,12 +9,17 @@ import { Router } from '@angular/router';
 })
 export class LoggedNavbarComponent implements OnInit {
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
+  username:any
+  user_id:any
   constructor(
     private dialog: MatDialog,
     private router:Router,
   ) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem('username')
+    this.user_id = localStorage.getItem('user_id')
+    console.log(this.username)
   }
   SignOutDialog(){
     let dialogRef = this.dialog.open(this.callAPIDialog);

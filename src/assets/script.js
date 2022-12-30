@@ -40,3 +40,9 @@ var studentDetails = [
 
     // wanja
 
+    window.onload = function() { 
+      // console.log("hahhaha")
+      // this.snav.toggle()
+     
+    }
+  
