@@ -8,3 +8,9 @@
     background-size: cover;
 } 
 
+.mat-sidenav-container {
+   
+    position: relative;
+    height: 100%;
+
+  }
