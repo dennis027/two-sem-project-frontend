@@ -38,7 +38,8 @@ export class AdminComponent implements OnInit {
 
   user_id: any
   
-  constructor( private questionService: QuestionsService,
+  constructor( 
+     private questionService: QuestionsService,
      private answersService:AnswersService,
      private diagnosisService:DiagnosisService,
      private recommendationService:RecommendationsService,

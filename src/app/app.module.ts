@@ -87,6 +87,7 @@ import { PatientComponent } from './components/patient/patient.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.component';
 
 
 
@@ -103,7 +104,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     PatientComponent,
     ProfessionalComponent,
     ContactComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    LoggedNavbarComponent
   ], 
   imports: [ 
     BrowserAnimationsModule,

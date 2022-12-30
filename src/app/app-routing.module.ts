@@ -10,6 +10,7 @@ import { PatientComponent } from './components/patient/patient.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:'professional',component:ProfessionalComponent},
   {path:'contact',component:ContactComponent},
   {path:'whoweare',component:AboutUsComponent},
+  {path:"loginnavbar",component:LoggedNavbarComponent}
 ];
 
 @NgModule({
