@@ -38,15 +38,24 @@ export class AdminComponent implements OnInit {
   diagnosis:any
   testimony:any
   approve:any
+  mergeQA:any
   contact:any
   username: any;
   uniqueDiagnosis:any
   resed:any
   user_id: any
   uniqueRecom:any
-  answeredQ:any
-  unAnsweredQ:any
-  
+  answeredDiag:any
+  unansweredDiag:any
+  mergeApprove:any
+  uniqueTestimonies:any
+  answeredTestimonies:any
+  approvedTestimonies:any
+  unApprovedTestimonies:any
+  uniqueQuestion:any
+  uniqueAnswerd:any
+  uniqueUnanswed:any
+  uniqueQA:any
   @ViewChild('snav', { static: false }) usuarioMenu!: MatSidenav;
 
   panelOpenState = false;
@@ -88,11 +97,21 @@ export class AdminComponent implements OnInit {
       this.answers=res;
       console.log(this.answers)
    
-        let result = mergeById( this.questions, this.answers);
+        this.mergeQA = mergeById( this.questions, this.answers);
   
-        console.log(result)
-    
+        console.log(this.mergeQA)
+
+        this.uniqueQA = this.mergeQA.filter((id:any) => id.user == this.user_id)
+        console.log(this.uniqueQA)
+       
+        this.uniqueAnswerd = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date !== undefined) //filter for answered QUESTIONS
+        console.log(this.uniqueAnswerd)
+
+
+        this.uniqueUnanswed = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date === undefined) //filter for UNanswered QUESTIONS
+        console.log(this.uniqueUnanswed)
     })
+
 
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
@@ -101,28 +120,26 @@ export class AdminComponent implements OnInit {
       console.log(this.uniqueDiagnosis)
       })
 
+    
 
     this.recommendationService.getRecommendations().subscribe((res:any[])=>{
       this.recommendation=res
       console.log(this.recommendation)
       this.resed =mergediag(   this.diagnosis ,this.recommendation  );
-
       console.log(this.resed)
-      this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id)
+      console.log(this.resed)
+      this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
       console.log(this.uniqueRecom)
 
-      this.answeredQ = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date !== undefined)
-      console.log(this.answeredQ)
+      this.answeredDiag = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date !== undefined) //filter for UNanswered diagnosis
+      console.log(this.answeredDiag)
 
-      this.unAnsweredQ = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined)
-      console.log(this.unAnsweredQ)
+      this.answeredTestimonies = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined) //filter for answered diagnosis
+      console.log(this.answeredTestimonies)
 
-
-   
 
     })
- 
-    
+
     this.testimonyService.getTestimonies().subscribe((res:any[])=>{
       this.testimony=res
       console.log(this.testimony)
@@ -131,10 +148,25 @@ export class AdminComponent implements OnInit {
     this.approveService.getApproval().subscribe((res:any[])=>{
       this.approve=res
       console.log(this.approve)
-      let tres =mergeByTesti(   this.testimony,this.approve  );
+      this.mergeApprove =mergeByTesti(   this.testimony,this.approve  );
 
-      console.log(tres) 
+      console.log( this.mergeApprove) 
 
+      this.uniqueTestimonies = this.mergeApprove.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
+      console.log(this.uniqueTestimonies)
+
+      this.unansweredDiag = this.uniqueTestimonies.filter((uniqueTestimonies:any) => uniqueTestimonies.approve_date === undefined) //filter for answered testimonies
+      console.log(this.unansweredDiag)
+
+
+      this.answeredTestimonies = this.uniqueTestimonies.filter((uniqueTestimonies:any) => uniqueTestimonies.approve_date !== undefined) //filter for answered testimonies
+      console.log(this.answeredTestimonies)
+      
+      this.approvedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'T') //filter for APPROVED testimonies
+      console.log(this.approvedTestimonies)
+
+      this.unApprovedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'F') //filter for DISAPPROVED testimonies
+      console.log(this.unApprovedTestimonies)
     })
 
    this.contactService.getContact().subscribe((res:any[])=>{
