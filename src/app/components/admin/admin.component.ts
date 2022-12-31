@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, ViewChild,} from '@angular/core';
 import { QuestionsService } from 'src/app/services/questions.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +13,11 @@ import { RecommendationsService } from 'src/app/services/recommendations.service
 import { ApproveService } from 'src/app/services/approve.service';
 import { TestimoniesService } from 'src/app/services/testimonies.service';
 import { ContactService } from 'src/app/services/contact.service';
+
+
+import {MediaMatcher} from '@angular/cdk/layout';
+import {ChangeDetectorRef,  OnDestroy} from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 declare function mergeById(questions:any,answers:any):any
 declare function mergediag(diagnosis:any,recommendation:any):any
 declare function mergeByTesti(diagnosis:any,recommendation:any):any
@@ -35,9 +41,22 @@ export class AdminComponent implements OnInit {
   contact:any
   username: any;
   uniqueDiagnosis:any
-
+  resed:any
   user_id: any
+  uniqueRecom:any
+  answeredQ:any
+  unAnsweredQ:any
   
+  @ViewChild('snav', { static: false }) usuarioMenu!: MatSidenav;
+
+  panelOpenState = false;
+  mobileQuery: MediaQueryList;
+
+  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+
+
+  private _mobileQueryListener: () => void;
+ 
   constructor( 
      private questionService: QuestionsService,
      private answersService:AnswersService,
@@ -46,8 +65,14 @@ export class AdminComponent implements OnInit {
      private approveService:ApproveService,
      private testimonyService:TestimoniesService,
      private contactService:ContactService,
+     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, 
      
-     ) { }
+     ) { 
+      this.mobileQuery = media.matchMedia('(max-width: 896px)',);
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+  
+     }
 
   ngOnInit(): void {
 
@@ -80,10 +105,21 @@ export class AdminComponent implements OnInit {
     this.recommendationService.getRecommendations().subscribe((res:any[])=>{
       this.recommendation=res
       console.log(this.recommendation)
-      let resed =mergediag(   this.diagnosis ,this.recommendation  );
+      this.resed =mergediag(   this.diagnosis ,this.recommendation  );
 
-      console.log(resed)
- 
+      console.log(this.resed)
+      this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id)
+      console.log(this.uniqueRecom)
+
+      this.answeredQ = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date !== undefined)
+      console.log(this.answeredQ)
+
+      this.unAnsweredQ = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined)
+      console.log(this.unAnsweredQ)
+
+
+   
+
     })
  
     
@@ -103,10 +139,20 @@ export class AdminComponent implements OnInit {
 
    this.contactService.getContact().subscribe((res:any[])=>{
       this.contact=res
-      console.table(this.contact)
+      console.log(this.contact)
    })
 
 
   }
-
+  public closeSidenav() {
+    if (window.innerWidth < 896) {
+      this.usuarioMenu.close();
+  }
+    console.log("waaaaiiii")
+   
+ 
+  }
+   ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
 }

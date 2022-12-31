@@ -15,11 +15,11 @@
 
 <app-footer></app-footer> -->
 
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="!shouldRun" >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
   <mat-toolbar color="primary" class="example-toolbar" >
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
  
-    <h1 class="example-app-name ">Responsive App</h1>
+    <h1 class="mx-auto ">Addicts Dashboard</h1>
 
   </mat-toolbar>
 
@@ -28,41 +28,8 @@
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
       <mat-nav-list >
-        <mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Personal data
-      </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Age">
-    </mat-form-field>
-  </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <button (close)="mobileQuery.matches ? true : true"  >    <p >I'm visible because I am open</p></button>
-    <button (click)="closeSidenav()">    <mat-icon >close</mat-icon></button>
-  </mat-expansion-panel>
-
-</mat-accordion> 
-<p>hahaha</p>
+     
+        <button mat-stroked-button color="primary" (click)="closeSidenav()">   	<mat-icon>dashboard</mat-icon> Dashboard</button>
       </mat-nav-list>
     </mat-sidenav>
 
@@ -73,6 +40,6 @@ hahaha --> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><
   </mat-sidenav-container>
 </div>
 
-<div *ngIf="shouldRun">Please open on Stackblitz to see result</div>
+
 
 
