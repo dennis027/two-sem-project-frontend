@@ -1,45 +1,78 @@
-<!-- <app-logged-navbar></app-logged-navbar>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 " id="sideba">
-
-        </div>
-        <div class="col-md-9" id="mainb">
-
-        </div>
-    </div>
-</div>
-
-
-
-<app-footer></app-footer> -->
 
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-  <mat-toolbar color="primary" class="example-toolbar" >
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+  <mat-sidenav-container  class="example-sidenav-container" 
+  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+<mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+[fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
+<mat-nav-list  style="width: 200px; background-color: darkcyan; ">
+
+
+
+
+  <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'home'}}]"  (click)="closeSidenav()" >  <mat-icon>dashboard</mat-icon> <h4>Dashboard</h4> </a> <br> 
+  <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'diagnosis'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>See Doctor </h4> </a> <br>
+  <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'questions'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Questions and Answers </h4> </a> <br>
+  <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'testimonies'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Testimonies </h4> </a> <br>
+
+
+</mat-nav-list>
+</mat-sidenav>
+
+<mat-sidenav-content >
+
+  <mat-toolbar color="primary" class="example-toolbar" style="  min-height:0px !important;" >
+    <button mat-icon-button (click)="snav.toggle()"> <mat-icon>menu</mat-icon></button>
+    
+
  
-    <h1 class="mx-auto ">Addicts Dashboard</h1>
+    <h1 class="mx-auto ">Addict Dashboard </h1>
 
   </mat-toolbar>
 
-  <mat-sidenav-container  class="example-sidenav-container" style="height: 90vh;"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
-      <mat-nav-list >
-     
-        <button mat-stroked-button color="primary" (click)="closeSidenav()">   	<mat-icon>dashboard</mat-icon> Dashboard</button>
-      </mat-nav-list>
-    </mat-sidenav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <mat-card>
+          <mat-card-title class="tes"> 
+            <mat-icon>supervised_user_circle</mat-icon>
+            App Users
+          </mat-card-title>
+        </mat-card>
+      </div>
+      <div class="col-md-3">
+        <mat-card>
+          <mat-card-title class="tes">
+            <mat-icon> local_hospital</mat-icon>
+           Diagnosis Done
+          </mat-card-title>
+        </mat-card>
+      </div>
+      <div class="col-md-3" class="tes">
+        <mat-card>
+          <mat-card-title>
+            <mat-icon>question_answer</mat-icon>
+            Question Asked
+          </mat-card-title>
+        </mat-card>
+      </div>
+      <div class="col-md-3" class="tes">
+        <mat-card>
+          <mat-card-title>
+            <mat-icon>question_answer</mat-icon>
+            Question Answered
+          </mat-card-title>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 
-    <mat-sidenav-content fullscreen>
-hahaha --> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> debewvbcyuvbec
- 
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+   <router-outlet name="addict" ></router-outlet>
 
+</mat-sidenav-content>
+</mat-sidenav-container>
+   
+  
 
+  </div>
 
 

@@ -1,31 +1,38 @@
 
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-    <mat-toolbar color="primary" class="example-toolbar" >
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+  <mat-sidenav-container  class="example-sidenav-container" style="height: 90vh;"
+  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+<mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+[fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
+<mat-nav-list >
+
+
+<br>
+<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'home'}}]"  (click)="closeSidenav()" >  <mat-icon>dashboard</mat-icon> <h4>Dashboard</h4> </a> <br> 
+<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'accounts'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>Accounts </h4> </a> <br>
+<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'recommend'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>Recommend </h4> </a> <br>
+<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'answers'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4> Answers </h4> </a> <br>
+<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'approve'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Approves </h4> </a> <br>
+
+</mat-nav-list>
+</mat-sidenav>
+
+<mat-sidenav-content fullscreen>
+
+  <mat-toolbar color="primary" class="example-toolbar" >
+    <button mat-icon-button (click)="snav.toggle()"> <mat-icon>menu</mat-icon></button>
+ 
+    <h1 class="mx-auto ">Admin Dashboard </h1>
+
+  </mat-toolbar>
+
+  <router-outlet name="admin" ></router-outlet>
+
+</mat-sidenav-content>
+</mat-sidenav-container>
    
-      <h1 class="mx-auto ">Admin Dashboard </h1>
   
-    </mat-toolbar>
-  
-    <mat-sidenav-container  class="example-sidenav-container" style="height: 90vh;"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
-        <mat-nav-list >
-       
-         
-  <button (click)="closeSidenav()">     <mat-icon>dashboard</mat-icon></button>
-        </mat-nav-list>
-      </mat-sidenav>
-  
-      <mat-sidenav-content fullscreen>
-  hahaha --> __
-  <p  ng-repeat="item in amejibu">
-    
-  </p>
-   
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+
   </div>
   
     

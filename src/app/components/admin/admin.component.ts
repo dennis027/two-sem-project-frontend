@@ -96,9 +96,9 @@ export class AdminComponent implements OnInit {
     this.answersService.getAnswers().subscribe((res:any[]) =>{
       this.answers=res;
       console.log(this.answers)
-   
-        this.mergeQA = mergeById( this.questions, this.answers);
-  
+        if(this.questions !==undefined && this.answers !==undefined){
+            this.mergeQA = mergeById( this.questions, this.answers);
+
         console.log(this.mergeQA)
 
         this.uniqueQA = this.mergeQA.filter((id:any) => id.user == this.user_id)
@@ -110,6 +110,10 @@ export class AdminComponent implements OnInit {
 
         this.uniqueUnanswed = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date === undefined) //filter for UNanswered QUESTIONS
         console.log(this.uniqueUnanswed)
+
+        }
+      
+  
     })
 
 
@@ -125,7 +129,9 @@ export class AdminComponent implements OnInit {
     this.recommendationService.getRecommendations().subscribe((res:any[])=>{
       this.recommendation=res
       console.log(this.recommendation)
-      this.resed =mergediag(   this.diagnosis ,this.recommendation  );
+      if (this.diagnosis!==undefined && this.recommendation !==undefined){
+             this.resed =mergediag(   this.diagnosis ,this.recommendation  );
+
       console.log(this.resed)
       console.log(this.resed)
       this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
@@ -136,6 +142,9 @@ export class AdminComponent implements OnInit {
 
       this.answeredTestimonies = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined) //filter for answered diagnosis
       console.log(this.answeredTestimonies)
+      }
+ 
+  
 
 
     })
@@ -147,10 +156,11 @@ export class AdminComponent implements OnInit {
     })
     this.approveService.getApproval().subscribe((res:any[])=>{
       this.approve=res
-      console.log(this.approve)
-      this.mergeApprove =mergeByTesti(   this.testimony,this.approve  );
+      console.log(this.approve) 
+      if(this.testimony!==undefined && this.approve !==undefined){
+        this.mergeApprove =mergeByTesti(   this.testimony,this.approve  );
 
-      console.log( this.mergeApprove) 
+            console.log( this.mergeApprove) 
 
       this.uniqueTestimonies = this.mergeApprove.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
       console.log(this.uniqueTestimonies)
@@ -167,6 +177,10 @@ export class AdminComponent implements OnInit {
 
       this.unApprovedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'F') //filter for DISAPPROVED testimonies
       console.log(this.unApprovedTestimonies)
+      }
+
+
+  
     })
 
    this.contactService.getContact().subscribe((res:any[])=>{

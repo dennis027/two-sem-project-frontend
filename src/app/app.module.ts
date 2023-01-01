@@ -88,6 +88,20 @@ import { ProfessionalComponent } from './components/professional/professional.co
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.component';
+import { HomeComponent } from './components/patient/home/home.component';
+import { DiagnosisComponent } from './components/patient/diagnosis/diagnosis.component';
+import { QuestionsComponent } from './components/patient/questions/questions.component';
+import { TestimoniesComponent } from './components/patient/testimonies/testimonies.component';
+import { RecommendationsComponent } from './components/professional/recommendations/recommendations.component';
+import { ApprovalComponent } from './components/professional/approval/approval.component';
+import { AnswersComponent } from './components/professional/answers/answers.component';
+import { AdminApproveComponent } from './components/admin/admin-approve/admin-approve.component';
+import { AdminAnswersComponent } from './components/admin/admin-answers/admin-answers.component';
+import { AccountsComponent } from './components/admin/accounts/accounts.component';
+import { AdminRecommendationsComponent } from './components/admin/admin-recommendations/admin-recommendations.component';
+import { ProfHomeComponent } from './components/professional/prof-home/prof-home.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+
 
 
 
@@ -105,7 +119,21 @@ import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.
     ProfessionalComponent,
     ContactComponent,
     AboutUsComponent,
-    LoggedNavbarComponent
+    LoggedNavbarComponent,
+    HomeComponent,
+    DiagnosisComponent,
+    QuestionsComponent,
+    TestimoniesComponent,
+    RecommendationsComponent,
+    ApprovalComponent,
+    AnswersComponent,
+    AdminApproveComponent,
+    AdminAnswersComponent,
+    AccountsComponent,
+    AdminRecommendationsComponent,
+    ProfHomeComponent,
+    AdminHomeComponent,
+ 
   ], 
   imports: [ 
     BrowserAnimationsModule,
