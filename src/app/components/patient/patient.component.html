@@ -1,9 +1,9 @@
 
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
   <mat-sidenav-container  class="example-sidenav-container" 
-  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-[fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
+[fixedInViewport]="mobileQuery.matches" fixedTopGap="0" [opened]="mobileQuery.matches ? false : true">
 <mat-nav-list  style="width: 200px; background-color: darkcyan; ">
 
 

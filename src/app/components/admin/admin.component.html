@@ -1,9 +1,9 @@
 
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
   <mat-sidenav-container  class="example-sidenav-container" style="height: 90vh;"
-  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-[fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="mobileQuery.matches ? false : true">
+[fixedInViewport]="mobileQuery.matches" fixedTopGap="0" [opened]="mobileQuery.matches ? false : true">
 <mat-nav-list >
 
 
@@ -12,7 +12,7 @@
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'accounts'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>Accounts </h4> </a> <br>
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'recommend'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>Recommend </h4> </a> <br>
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'answers'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4> Answers </h4> </a> <br>
-<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'approve'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Approves </h4> </a> <br>
+<a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'approve'}}]"  (click)="closeSidenav()" >  <mat-icon>done_outline</mat-icon> <h4>Approves </h4> </a> <br>
 
 </mat-nav-list>
 </mat-sidenav>
