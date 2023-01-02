@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+const httpOptions = {
+  headers: new HttpHeaders ({'Content-Type':'application/json'})
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +17,11 @@ export class DiagnosisService {
   getDiagnosis(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.diagnosisAPI);
   }
+  postDiagnois(user:string,diagnosis_subject:string,diagnosis_message:string): Observable<any>{
+    return this.http.post(this.diagnosisAPI,{
+      
+      user,diagnosis_subject,diagnosis_message,
+    },httpOptions)
+  }
+
 }

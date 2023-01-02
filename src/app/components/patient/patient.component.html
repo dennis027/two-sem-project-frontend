@@ -1,14 +1,11 @@
 
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" style="height: 100vh;">
   <mat-sidenav-container  class="example-sidenav-container" 
   [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
 [fixedInViewport]="mobileQuery.matches" fixedTopGap="0" [opened]="mobileQuery.matches ? false : true">
 <mat-nav-list  style="width: 200px; background-color: darkcyan; ">
-
-
-
-
+<br><br>
   <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'home'}}]"  (click)="closeSidenav()" >  <mat-icon>dashboard</mat-icon> <h4>Dashboard</h4> </a> <br> 
   <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'diagnosis'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>See Doctor </h4> </a> <br>
   <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'questions'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Questions and Answers </h4> </a> <br>
@@ -47,18 +44,18 @@
           </mat-card-title>
         </mat-card>
       </div>
-      <div class="col-md-3" class="tes">
+      <div class="col-md-3">
         <mat-card>
-          <mat-card-title>
-            <mat-icon>question_answer</mat-icon>
+          <mat-card-title class="tes">
+            <mat-icon> local_hospital</mat-icon>
             Question Asked
           </mat-card-title>
         </mat-card>
       </div>
-      <div class="col-md-3" class="tes">
+      <div class="col-md-3">
         <mat-card>
-          <mat-card-title>
-            <mat-icon>question_answer</mat-icon>
+          <mat-card-title class="tes">
+            <mat-icon> question_answer</mat-icon>
             Question Answered
           </mat-card-title>
         </mat-card>
@@ -66,6 +63,8 @@
     </div>
   </div>
 
+   <br>
+ 
    <router-outlet name="addict" ></router-outlet>
 
 </mat-sidenav-content>

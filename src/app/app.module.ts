@@ -101,6 +101,7 @@ import { AccountsComponent } from './components/admin/accounts/accounts.componen
 import { AdminRecommendationsComponent } from './components/admin/admin-recommendations/admin-recommendations.component';
 import { ProfHomeComponent } from './components/professional/prof-home/prof-home.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { MatTableResponsiveDirective } from './directive/mat-table-responsive.directive';
 
 
 
@@ -133,6 +134,7 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
     AdminRecommendationsComponent,
     ProfHomeComponent,
     AdminHomeComponent,
+    MatTableResponsiveDirective,
  
   ], 
   imports: [ 
