@@ -1,1 +1,225 @@
-<p>testimonies works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          
+            <mat-card>
+                <h3 class="text-center"> Un Answered Testimonies</h3>
+                <button mat-raised-button color="primary" style="float: right;" (click)="openDialogD()">Send A New Testimony</button>
+                <br><br>
+                <mat-card>
+                <table mat-table matTableResponsive [dataSource]="unansweredDiag" class="example-container">
+                  
+                    <ng-container matColumnDef="testimony_date">
+                      <th mat-header-cell *matHeaderCellDef>Testimonies Sending Date . </th>
+                      <td mat-cell *matCellDef="let element"> {{element.testimony_date| date :'medium'}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="testimony_subject">
+                      <th mat-header-cell *matHeaderCellDef> Testimony Subject </th>
+                      <td mat-cell *matCellDef="let element"> {{element.testimony_subject}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="testimony_message">
+                      <th mat-header-cell *matHeaderCellDef> Message </th>
+                      <td mat-cell *matCellDef="let element"> {{element.testimony_message}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="testimony_location">
+                        <th mat-header-cell *matHeaderCellDef> Location</th>
+                        <td mat-cell *matCellDef="let element"> {{element.testimony_location }} </td>
+                    </ng-container>
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </mat-card>
+            </mat-card>
+                        <br><br>
+
+            <mat-card>
+                <h3 class="text-center">Replied Diagnosis </h3>
+                <mat-card>
+
+                
+                <div class="example-container">
+                <table mat-table matSort matTableResponsive [dataSource]="answeredTestimonies" >
+
+                <ng-container matColumnDef="testimony_date">
+                    <th mat-header-cell *matHeaderCellDef>Date Testimony Sent</th>
+            
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_date | date :'medium'}}</td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="testimony_subject">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Testimony Subject</th>
+                
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_subject}} </td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="testimony_message">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Testimony Message </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_message}} </td>
+                </ng-container>
+                <ng-container matColumnDef="testimony_location">
+                    <th mat-header-cell *matHeaderCellDef> Testimony Location </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_location }} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="approve_date">
+                    <th mat-header-cell *matHeaderCellDef> Approval Subject </th>
+                    <td mat-cell *matCellDef="let element"> {{element.approve_date | date :'medium'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="approveTF">
+                    <th mat-header-cell *matHeaderCellDef> Approval Status</th>
+                    <td mat-cell *matCellDef="let element"> {{element.approveTF}} </td>
+                </ng-container>
+            
+            
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef>
+                    <button mat-icon-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedSeen; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedSeen;"></tr>
+                </table>
+               </div>
+            </mat-card>
+            </mat-card>
+
+            <mat-card>
+                <h3 class="text-center">Approved Testimonies </h3>
+                <mat-card>
+
+                
+                <div class="example-container">
+                <table mat-table matSort matTableResponsive [dataSource]="approvedTestimonies" >
+
+                <ng-container matColumnDef="testimony_date">
+                    <th mat-header-cell *matHeaderCellDef>Date Testimony Sent</th>
+            
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_date | date :'medium'}}</td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="testimony_subject">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Testimony Subject</th>
+                
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_subject}} </td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="testimony_message">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Testimony Message </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_message}} </td>
+                </ng-container>
+                <ng-container matColumnDef="testimony_location">
+                    <th mat-header-cell *matHeaderCellDef> Testimony Location </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_location }} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="approve_date">
+                    <th mat-header-cell *matHeaderCellDef> Approval Subject </th>
+                    <td mat-cell *matCellDef="let element"> {{element.approve_date | date :'medium'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="approveTF">
+                    <th mat-header-cell *matHeaderCellDef> Approval Status</th>
+                    <td mat-cell *matCellDef="let element"> {{element.approveTF}} </td>
+                </ng-container>
+            
+            
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef>
+                    <button mat-icon-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedApproved; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedApproved;"></tr>
+                </table>
+               </div>
+            </mat-card>
+            </mat-card>
+
+
+
+
+            <mat-card>
+                <h3 class="text-center">Disapproved Testimonies </h3>
+                <mat-card>
+
+                
+                <div class="example-container">
+                <table mat-table matSort matTableResponsive [dataSource]="unApprovedTestimonies" >
+
+                <ng-container matColumnDef="testimony_date">
+                    <th mat-header-cell *matHeaderCellDef>Date Testimony Sent</th>
+            
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_date | date :'medium'}}</td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="testimony_subject">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Testimony Subject</th>
+                
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_subject}} </td>
+                </ng-container>
+            
+                
+                <ng-container matColumnDef="testimony_message">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Testimony Message </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_message}} </td>
+                </ng-container>
+                <ng-container matColumnDef="testimony_location">
+                    <th mat-header-cell *matHeaderCellDef> Testimony Location </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testimony_location }} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="approve_date">
+                    <th mat-header-cell *matHeaderCellDef> Date of Approval </th>
+                    <td mat-cell *matCellDef="let element"> {{element.approve_date | date :'medium'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="approveTF">
+                    <th mat-header-cell *matHeaderCellDef> Approval Status</th>
+                    <td mat-cell *matCellDef="let element"> {{element.approveTF}} </td>
+                </ng-container>
+            
+            
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef>
+                    <button mat-icon-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedunApproved; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedunApproved;"></tr>
+                </table>
+               </div>
+            </mat-card>
+            </mat-card>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
