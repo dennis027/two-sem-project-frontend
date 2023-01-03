@@ -28,6 +28,7 @@ export interface unseenClass {
   styleUrls: ['./testimonies.component.css']
 })
 export class TestimoniesComponent implements OnInit {
+  @ViewChild('f') form!:NgForm
   @ViewChild('openDialogDia') openDialogDia!: TemplateRef<any>;
   testimony: any;
   approve: any;
@@ -39,7 +40,12 @@ export class TestimoniesComponent implements OnInit {
   // approvedTestimonies: any;
   // unApprovedTestimonies: any;
   username:any
-
+  data:any={
+    user:null,
+    testimony_subject:null,
+    testimony_message:null,
+    testimony_location:null,
+  }
   constructor(
     private testimonyService:TestimoniesService,
     private approveService:ApproveService,
@@ -102,6 +108,60 @@ export class TestimoniesComponent implements OnInit {
     })
   }
   openDialogD() {
-
+    let dialogRef = this.dialog.open(this.openDialogDia);
+        dialogRef.afterClosed().subscribe(result => {
+            // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+            if (result !== undefined) {
+                if (result === 'yes') {
+                  let {user = this.user_id,testimony_subject,testimony_message,testimony_location}= this.data;
+                  this.testimonyService.postTestimonies(user =this.user_id,testimony_subject,testimony_message,testimony_location).subscribe(
+                    (data) => {
+                  
+                      // this.loader=false
+                    
+                      console.log(data)
+                      this.toastr.success('Sober Space Received Your Message');
+                      this.form.resetForm({})
+               
+                   
+                    },
+                    (err) => {
+                      // this.loader=false
+                     console.log(err)
+                     this.toastr.error('Check Your Details ');
+                  
+                    });
+                    // );
+                } else if (result === 'no') {
+                    // TODO: Replace the following line with your code.
+                    console.log('User clicked no.');
+                }
+            }
+        })
   }
+
+  onSubmit(): void{
+    // this.loader=true
+    let {user = this.user_id,testimony_subject,testimony_message,testimony_location}= this.data;
+    this.testimonyService.postTestimonies(user =this.user_id,testimony_subject,testimony_message,testimony_location).subscribe(
+      (data) => {
+    
+        // this.loader=false
+      
+        console.log(data)
+        this.toastr.success('Sober Space Received Your Message');
+        this.form.resetForm({})
+ 
+     
+      },
+      (err) => {
+        // this.loader=false
+       console.log(err)
+       this.toastr.error('Check Your Details ');
+    
+      });
+      // );
+      // this.dialogRef.close();
+  }
+
 }
