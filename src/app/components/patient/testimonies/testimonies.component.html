@@ -37,7 +37,7 @@
             </mat-card>
                         <br><br>
 
-            <mat-card>
+            <!-- <mat-card>
                 <h3 class="text-center">Replied Diagnosis </h3>
                 <mat-card>
 
@@ -95,7 +95,7 @@
                 </table>
                </div>
             </mat-card>
-            </mat-card>
+            </mat-card> -->
 
             <mat-card>
                 <h3 class="text-center">Approved Testimonies </h3>
@@ -224,31 +224,7 @@
     </div>
 </div>
 
-<form class="example-form"  name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="text-center" >
-                  
-                 
-    <mat-form-field class="example-full-width" style="width:100% !important; "  appearance="outline">
-        <mat-label>Testimony Subject</mat-label>
-    <input matInput placeholder="Testimony Subject" name="testimony_subject" [(ngModel)]="data.testimony_subject" #testimony_subject="ngModel" matInput type="text" >
-    </mat-form-field>
-     <br> <br>
-    <mat-form-field class="example-full-width" style="width:100% !important; " appearance="outline" >
-        <mat-label>Testimony Message</mat-label>
-      <input matInput placeholder="Testimony Message" name="testimony_message" [(ngModel)]="data.testimony_message" #testimony_message="ngModel" matInput type="text" >
-    </mat-form-field>
-    <br> 
 
-    <mat-form-field class="example-full-width" style="width:100% !important; " appearance="outline" >
-        <mat-label>Your Location</mat-label>
-      <input matInput placeholder="Your Location" name="testimony_location" [(ngModel)]="data.testimony_location" #testimony_location="ngModel" matInput type="text" >
-    </mat-form-field>
-    <br> 
-
-  
-         
-    
-    
-</form>
 
 <ng-template #openDialogDia>
     <form class="example-form"  name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="text-center" >

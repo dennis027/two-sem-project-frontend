@@ -1,1 +1,47 @@
-<p>answers works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <mat-card>
+                <mat-card-header>
+                    <h3 class="mx-auto">Pending Questions</h3>
+                </mat-card-header>
+         
+                <mat-card>
+                    <table mat-table matTableResponsive [dataSource]="unansweredDiag" class="example-container">
+                    
+                        <ng-container matColumnDef="diagnosis_date">
+                        <th mat-header-cell *matHeaderCellDef> Date Sending. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.diagnosis_date| date :'medium'}} </td>
+                        </ng-container>
+                    
+                        <ng-container matColumnDef="diagnosis_subject">
+                        <th mat-header-cell *matHeaderCellDef> Message Subject </th>
+                        <td mat-cell *matCellDef="let element"> {{element.diagnosis_subject}} </td>
+                        </ng-container>
+                    
+                        <ng-container matColumnDef="diagnosis_message">
+                        <th mat-header-cell *matHeaderCellDef> Message </th>
+                        <td mat-cell *matCellDef="let element"> {{element.diagnosis_message}} </td>
+                        </ng-container>
+                    
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Actions</th>
+                            <td  mat-cell *matCellDef="let element" >
+                              <button (click)="getId(element.id)" mat-icon-button >
+                                <span class="material-icons">question_answer</span>
+                              </button>
+                             
+                         
+                            </td>
+                          </ng-container>
+                    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    </mat-card>
+            </mat-card>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>        

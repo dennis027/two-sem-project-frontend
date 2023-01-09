@@ -1,6 +1,6 @@
 
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-  <mat-sidenav-container  class="example-sidenav-container" style="height: 90vh;"
+  <mat-sidenav-container  class="example-sidenav-container" style="height: 100vh;"
   [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
 [fixedInViewport]="mobileQuery.matches" fixedTopGap="0" [opened]="mobileQuery.matches ? false : true">
@@ -9,8 +9,8 @@
 <br>
 
 <a mat-list-item [routerLink]="['/professional', {outlets: {prof: 'home'}}]"  (click)="closeSidenav()" >  <mat-icon>dashboard</mat-icon> <h4>Dashboard</h4> </a> <br> 
-<a mat-list-item [routerLink]="['/professional', {outlets: {prof: 'recommend'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>See Doctor </h4> </a> <br>
-<a mat-list-item [routerLink]="['/professional', {outlets: {prof: 'answer'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Questions and Answers </h4> </a> <br>
+<a mat-list-item [routerLink]="['/professional', {outlets: {prof: 'recommend'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>See Addicts </h4> </a> <br>
+<a mat-list-item [routerLink]="['/professional', {outlets: {prof: 'answer'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4> Answers Questions </h4> </a> <br>
 <a mat-list-item [routerLink]="['/professional', {outlets: {prof: 'approval'}}]"  (click)="closeSidenav()" > <mat-icon>done_outline</mat-icon> <h4>Approve </h4> </a> <br>
 </mat-nav-list>
 </mat-sidenav>
