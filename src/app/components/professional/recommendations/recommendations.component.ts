@@ -28,6 +28,8 @@ export class RecommendationsComponent implements OnInit {
   user_id: any
   uniqueRecom:any
   diagnosis:any
+  // unansweredDiag:any
+  answeredDiag:any
   recommendation:any
   constructor(
     private diagnosisService:DiagnosisService,
@@ -46,6 +48,7 @@ export class RecommendationsComponent implements OnInit {
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
       console.log(this.diagnosis)    
+
       this.uniqueDiagnosis = this.diagnosis.filter((id:any) => id.user == this.user_id)
       console.log(this.uniqueDiagnosis)
       })
@@ -60,24 +63,27 @@ export class RecommendationsComponent implements OnInit {
 
       console.log(this.resed)
       console.log(this.resed)
-      this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
-      console.log(this.uniqueRecom)
+      // this.diagnosis = this.resed.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
+      // console.log(this.diagnosis)
 
 
-      this.unansweredDiag = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined) //filter for answered diagnosis
+      this.unansweredDiag = this.resed.filter((resed:any) => resed.recommendation_date === undefined) //filter for answered diagnosis
       console.log(this.unansweredDiag)
+      
+      this.answeredDiag = this.resed.filter((resed:any) => resed.recommendation_date !== undefined) //filter for answered diagnosis
+      console.log(this.answeredDiag)
       }
- 
-  
-
-
+   
+      
+    
     })
+    
     
   }
 
 
   getId(id:any){
-    let currentData = this.unansweredDiag.find((p) =>{return p.id ===  id});
+    let currentData = this.diagnosis.find((p: { id: any; }) =>{return p.id ===  id});
     console.log(currentData)
   }
 }
