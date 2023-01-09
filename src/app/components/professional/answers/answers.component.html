@@ -6,7 +6,34 @@
                 <mat-card-header>
                     <h3 class="mx-auto">Pending Questions</h3>
                 </mat-card-header>
-         
+                <mat-card>
+                    <h3 class="text-center"> Un Answered Questions</h3>
+                   
+              
+                    <table mat-table matTableResponsive [dataSource]="unAnswered" class="example-container">
+                      
+                        <ng-container matColumnDef="question_date">
+                          <th mat-header-cell *matHeaderCellDef> Date Sending. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.question_date| date :'medium'}} </td>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="question_subject">
+                          <th mat-header-cell *matHeaderCellDef> Message Subject </th>
+                          <td mat-cell *matCellDef="let element"> {{element.question_subject}} </td>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="question_message">
+                          <th mat-header-cell *matHeaderCellDef> Message </th>
+                          <td mat-cell *matCellDef="let element"> {{element.question_message}} </td>
+                        </ng-container>
+                      
+                      
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+             
+                </mat-card>
                
             </mat-card>
         </div>
