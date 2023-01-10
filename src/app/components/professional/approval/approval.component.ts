@@ -14,6 +14,7 @@ export interface seenObject {
   testimony_location:string;
   approve_date:string;
   approveTF:string;
+  id:string
 }
 
 export interface unseenClass {
@@ -21,6 +22,7 @@ export interface unseenClass {
   testimony_subject: string;
   testimony_message: string;
   testimony_location:string
+  id:string
 }
 
 @Component({
@@ -29,6 +31,21 @@ export interface unseenClass {
   styleUrls: ['./approval.component.css']
 })
 export class ApprovalComponent implements OnInit {
+
+  approveObject: any = {
+    testimony_id: null,
+    user: null,
+    approveTF: null,
+  };
+
+  updateObject:any = {
+    id:null,
+    testimony_id: null,
+    user: null,
+    approveTF: null,
+    approve_date:null
+  }
+
   @ViewChild('f') form!:NgForm
   @ViewChild('openDialogDia') openDialogDia!: TemplateRef<any>;
   testimony: any;
@@ -36,6 +53,9 @@ export class ApprovalComponent implements OnInit {
   mergeApprove: any;
   uniqueTestimonies: any;
   user_id: any;
+  success:any
+  failed:any
+  ident:any
   // unansweredDiag: any;
   // answeredTestimonies: any;
   // approvedTestimonies: any;
@@ -55,19 +75,19 @@ export class ApprovalComponent implements OnInit {
 
   ) {}
   answeredTestimonies : seenObject[] = [ ];
-  displayedSeen: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF'];
+  displayedSeen: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF','actions'];
   dataSource = new MatTableDataSource([...this.answeredTestimonies ]);
 
   approvedTestimonies : seenObject[] = [ ];
-  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF'];
+  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF','actions'];
   dataSource3 = new MatTableDataSource([...this.approvedTestimonies ]);
 
   unApprovedTestimonies : seenObject[] = [ ];
-  displayedunApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF'];
+  displayedunApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF','actions'];
   dataSource2 = new MatTableDataSource([...this.unApprovedTestimonies ]);
 
    unansweredDiag: unseenClass[] = [ ];
-  displayedColumns: string[] = ['testimony_date','testimony_subject', 'testimony_message','testimony_location'];
+  displayedColumns: string[] = ['testimony_date','testimony_subject', 'testimony_message','testimony_location','actions'];
   dataSource1 = new MatTableDataSource([...this.unansweredDiag ]);
   ngOnInit(): void {
     this.username = localStorage.getItem('username')
@@ -109,4 +129,93 @@ export class ApprovalComponent implements OnInit {
     })
   }
 
+  getTrue(id:any){
+    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
+    console.log(currentData)
+    const approveObject = {
+      testimony_id: currentData.id,
+      user: this.user_id,
+      approveTF: 'T',
+    }
+    this.approveService.postApproval(approveObject).subscribe(
+      (res)=>{
+      
+        this.success=res
+        this.toastr.success("Approved Successfully")
+ 
+      },
+      (err)=>{
+     
+        this.failed=err
+        this.toastr.error("Error")
+      }
+    )
+  }
+  getFalse(id:any){
+    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
+    console.log(currentData)
+    const approveObject = {
+      testimony_id: currentData.id,
+      user: this.user_id,
+      approveTF: 'F',
+    }
+    this.approveService.postApproval(approveObject).subscribe(
+      (res)=>{
+      
+        this.success=res
+        this.toastr.success('Disapproved Successfully')
+ 
+      },
+      (err)=>{
+     
+        this.failed=err
+        this.toastr.error("Error")
+      }
+    )
+  }
+
+  disAppApproved(id:any){
+    let currentData = this.approve.find((p: { testimony_id: any; }) =>{return p.testimony_id ===  id});
+    console.log(currentData)
+    this.ident=currentData.id
+    console.log(this.ident)
+    const updateObject = {
+      id:currentData.id,
+      testimony_id: currentData.testimony_id,
+      user: currentData.user,
+      approveTF: 'F',
+      approve_date:currentData.approve_date,
+    }
+    this.approveService.updateData(this.ident,updateObject)
+    
+  }
+
+  appDisapproved(id:any){
+    let currentData = this.approve.find((p: { testimony_id: any; }) =>{return p.testimony_id ===  id});
+    console.log(currentData)
+    this.ident=currentData.id
+    console.log(this.ident)
+    const updateObject = {
+      id:currentData.id,
+      testimony_id: currentData.testimony_id,
+      user: currentData.user,
+      approveTF: 'T',
+      approve_date:currentData.approve_date,
+    }
+    this.approveService.updateData(this.ident,updateObject)
+    
+  }
+
+  
+
+  getApproved(id:any){
+    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
+    console.log(currentData.id)
+
+
+  }
+  getUnapproved(id:any){
+    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
+    console.log(currentData)
+  }
 }
