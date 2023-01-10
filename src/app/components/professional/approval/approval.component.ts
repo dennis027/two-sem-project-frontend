@@ -206,13 +206,6 @@ export class ApprovalComponent implements OnInit {
     
   }
 
-  deleteTestimony(id:any){
-    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData.id)
-
-   
-   
-  }
 
   openDeleteDialog(id:any) {
     let dialogRef = this.dialog.open(this.deleteDialog);
