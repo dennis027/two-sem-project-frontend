@@ -75,15 +75,15 @@ export class ApprovalComponent implements OnInit {
 
   ) {}
   answeredTestimonies : seenObject[] = [ ];
-  displayedSeen: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF','actions'];
+  displayedSeen: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','actions'];
   dataSource = new MatTableDataSource([...this.answeredTestimonies ]);
 
   approvedTestimonies : seenObject[] = [ ];
-  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF','actions'];
+  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','actions'];
   dataSource3 = new MatTableDataSource([...this.approvedTestimonies ]);
 
   unApprovedTestimonies : seenObject[] = [ ];
-  displayedunApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF','actions'];
+  displayedunApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','actions'];
   dataSource2 = new MatTableDataSource([...this.unApprovedTestimonies ]);
 
    unansweredDiag: unseenClass[] = [ ];
@@ -206,7 +206,10 @@ export class ApprovalComponent implements OnInit {
     
   }
 
-  
+  deleteTestimony(id:any){
+    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
+    console.log(currentData.id)
+  }
 
   getApproved(id:any){
     let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
