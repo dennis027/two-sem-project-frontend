@@ -25,4 +25,9 @@ export class TestimoniesService {
       user,testimony_subject,testimony_message,testimony_location
     },httpOptions)
   }
+
+  deleteData (id: number): Observable<any[]> {
+    return this.httpClient.delete<any[]>(this.testimonyAPI + id+'/');  
+  }
+  
 }

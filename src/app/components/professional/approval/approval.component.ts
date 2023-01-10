@@ -47,7 +47,7 @@ export class ApprovalComponent implements OnInit {
   }
 
   @ViewChild('f') form!:NgForm
-  @ViewChild('openDialogDia') openDialogDia!: TemplateRef<any>;
+  @ViewChild('deleteDialog') deleteDialog!: TemplateRef<any>;
   testimony: any;
   approve: any;
   mergeApprove: any;
@@ -209,16 +209,27 @@ export class ApprovalComponent implements OnInit {
   deleteTestimony(id:any){
     let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
     console.log(currentData.id)
+
+   
+   
   }
 
-  getApproved(id:any){
+  openDeleteDialog(id:any) {
+    let dialogRef = this.dialog.open(this.deleteDialog);
     let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
     console.log(currentData.id)
-
-
-  }
-  getUnapproved(id:any){
-    let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData)
-  }
+    dialogRef.afterClosed().subscribe(result => {
+        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+        if (result !== undefined) {
+            if (result === 'yes') {
+              this.testimonyService.deleteData(id).subscribe(
+                (msg) => console.log(msg),
+                (error) => console.log(error)
+              );
+            } else if (result === 'no') {
+           
+            }
+        }
+    })
+}
 }

@@ -92,7 +92,7 @@
                     <td mat-cell *matCellDef="let element">
                     <button  mat-raised-button (click)="disAppApproved(element.id)" color="warn">Disapprove</button>    
                  
-                    <button mat-icon-button (click)="deleteTestimony(element.id)">
+                    <button mat-icon-button (click)="openDeleteDialog(element.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                     </td>
@@ -154,7 +154,7 @@
                     <td mat-cell *matCellDef="let element">
                   <button mat-raised-button (click)="appDisapproved(element.id)" color="primary">Approve</button>     
                  
-                    <button mat-icon-button (click)="deleteTestimony(element.id)">
+                    <button mat-icon-button (click)="openDeleteDialog(element.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                     </td>
@@ -170,6 +170,15 @@
         <div class="col-md-2"></div>
     </div>
 </div>
+
+<ng-template #deleteDialog>
+    <h2 matDialogTitle>Are you sure you want to delete</h2>
+    <mat-dialog-actions align="end">
+        <button mat-button matDialogClose="no"> Cancel</button>
+     
+        <button mat-raised-button color="warn" matDialogClose="yes">Delete</button>
+    </mat-dialog-actions>
+</ng-template>
 
 
 
