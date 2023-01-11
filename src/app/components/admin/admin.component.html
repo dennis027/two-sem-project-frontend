@@ -1,6 +1,6 @@
 
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-  <mat-sidenav-container  class="example-sidenav-container" style="height: 90vh;"
+  <mat-sidenav-container  class="example-sidenav-container" style="height: 100vh;"
   [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
 [fixedInViewport]="mobileQuery.matches" fixedTopGap="0" [opened]="mobileQuery.matches ? false : true">
@@ -19,7 +19,7 @@
 
 <mat-sidenav-content fullscreen>
 
-  <mat-toolbar color="primary" class="example-toolbar" >
+  <mat-toolbar color="primary" class="example-toolbar"  >
     <button mat-icon-button (click)="snav.toggle()"> <mat-icon>menu</mat-icon></button>
  
     <h1 class="mx-auto ">Admin Dashboard </h1>
