@@ -17,4 +17,9 @@ export class UsersService {
   getUsers():Observable<any[]>{
     return this.httpClient.get<any[]>(this.usersAPI);
   }
+
+  addUser(userData:any): Observable<any>{
+    return this.httpClient.post(this.usersAPI,userData,httpOptions)
+  }
+
 }
