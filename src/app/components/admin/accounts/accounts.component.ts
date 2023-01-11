@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import {AfterViewInit,  ViewChild,TemplateRef} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
@@ -8,6 +8,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { Observable, Subscription, timer } from 'rxjs';
 
 export interface usersObject {
   username:string;
@@ -28,8 +29,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./accounts.component.css']
 })
 
-export class AccountsComponent implements OnInit {
-
+export class AccountsComponent implements OnInit , OnDestroy {
+  subscription!: Subscription;
+  everyFiveSeconds: Observable<number> = timer(0, 5000);
   @ViewChild('adminDialog') adminDialog!: TemplateRef<any>;
   @ViewChild('professionalDialog') professionalDialog!: TemplateRef<any>;
   @ViewChild('addictsDialog') addictsDialog!: TemplateRef<any>;
@@ -93,22 +95,26 @@ export class AccountsComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
   ngOnInit(): void {
+
+    this.subscription = this.everyFiveSeconds.subscribe(() => {
+  
+
     this.dataSource.sort = this.sort;
     this.usersService.getUsers().subscribe((res:any[])=>{
       this.users=res
-      console.log(this.users)
+      // console.log(this.users)
 
       this.admin = this.users.filter((users:any) => users.role === "is_admin")
-      console.log(this.admin)
+      // console.log(this.admin)
 
       this.professional = this.users.filter((users:any) => users.role === "is_professional")
-      console.log(this.professional)
+      // console.log(this.professional)
 
       this.addicts = this.users.filter((users:any) => users.role === "is_addict")
-      console.log(this.addicts)
+      // console.log(this.addicts)
     })
    
-  
+  });
   }
 
   onSubmitAdmin(){
@@ -123,12 +129,12 @@ export class AccountsComponent implements OnInit {
     this.usersService.addUser(userData).subscribe(
       (data)=>{
           
-        console.log(data)
+        // console.log(data)
         this.toastr.success('Admin Added Successfully');
         this.form.resetForm({})
       },
       (err)=>{
-        console.log(err)
+        // console.log(err)
         this.toastr.error('Check Your Details ');
       }
     )
@@ -146,12 +152,12 @@ export class AccountsComponent implements OnInit {
     this.usersService.addUser(userProf).subscribe(
       (data)=>{
           
-        console.log(data)
+        // console.log(data)
         this.toastr.success('Professional Added Successfully');
         this.form.resetForm({})
       },
       (err)=>{
-        console.log(err)
+        // console.log(err)
         this.toastr.error('Check Your Details ');
       }
     )
@@ -169,12 +175,12 @@ export class AccountsComponent implements OnInit {
     this.usersService.addUser(userAdd).subscribe(
       (data)=>{
           
-        console.log(data)
+        // console.log(data)
         this.toastr.success('Addict Added Successfully');
         this.form.resetForm({})
       },
       (err)=>{
-        console.log(err)
+        // console.log(err)
         this.toastr.error('Check Your Details ');
       }
     )
@@ -188,10 +194,10 @@ export class AccountsComponent implements OnInit {
         if (result !== undefined) {
             if (result === 'yes') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked yes.');
+                // console.log('User clicked yes.');
             } else if (result === 'no') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked no.');
+                // console.log('User clicked no.');
             }
         }
     })
@@ -203,10 +209,10 @@ export class AccountsComponent implements OnInit {
         if (result !== undefined) {
             if (result === 'yes') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked yes.');
+                // console.log('User clicked yes.');
             } else if (result === 'no') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked no.');
+                // console.log('User clicked no.');
             }
         }
     })
@@ -222,10 +228,10 @@ export class AccountsComponent implements OnInit {
         if (result !== undefined) {
             if (result === 'yes') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked yes.');
+                // console.log('User clicked yes.');
             } else if (result === 'no') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked no.');
+                // console.log('User clicked no.');
             }
         }
     })
@@ -247,9 +253,13 @@ export class AccountsComponent implements OnInit {
               );
             } else if (result === 'no') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked no.');
+                // console.log('User clicked no.');
             }
         }
     })
+}
+
+ngOnDestroy() {
+  this.subscription.unsubscribe();
 }
 }

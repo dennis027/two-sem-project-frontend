@@ -36,7 +36,7 @@ var studentDetails = [
   
     var result = mergeByTesti(studentDetails, studentMark);   
 
-    console.log(result)  
+    // console.log(result)  
 
     // wanja
 

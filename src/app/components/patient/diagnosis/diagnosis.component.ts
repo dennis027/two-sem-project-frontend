@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DiagnosisService } from 'src/app/services/diagnosis.service';
 import { RecommendationsService } from 'src/app/services/recommendations.service';
 import {MatPaginator} from '@angular/material/paginator';
@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription, Observable, timer } from 'rxjs';
 
 export interface seenObject {
   diagnosis_date:string;
@@ -28,7 +29,10 @@ declare function mergediag(questions:any,answers:any):any
   templateUrl: './diagnosis.component.html',
   styleUrls: ['./diagnosis.component.css']
 })
-export class DiagnosisComponent implements OnInit {
+export class DiagnosisComponent implements OnInit , OnDestroy {
+  subscription!: Subscription;
+  everyFiveSeconds: Observable<number> = timer(0, 5000);
+  
   username: any;
   uniqueDiagnosis:any
   resed:any
@@ -61,42 +65,50 @@ export class DiagnosisComponent implements OnInit {
       unansweredDiag: unseenClass[] = [ ];
      displayedColumns: string[] = ['diagnosis_date','diagnosis_subject', 'diagnosis_message'];
      dataSource1 = new MatTableDataSource([...this.unansweredDiag ]);
-  ngOnInit(): void {
+      ngOnInit(): void {
+
+    this.subscription = this.everyFiveSeconds.subscribe(() => {
+
+
+
+
     this.username = localStorage.getItem('username')
     this.user_id = localStorage.getItem('user_id')
-    console.log(this.username)
+    // console.log(this.username)
 
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
-      console.log(this.diagnosis)    
+      // console.log(this.diagnosis)    
       this.uniqueDiagnosis = this.diagnosis.filter((id:any) => id.user == this.user_id)
-      console.log(this.uniqueDiagnosis)
+      // console.log(this.uniqueDiagnosis)
       })
 
     
 
     this.recommendationService.getRecommendations().subscribe((res:any[])=>{
       this.recommendation=res
-      console.log(this.recommendation)
+      // console.log(this.recommendation)
       if (this.diagnosis!==undefined && this.recommendation !==undefined){
              this.resed =mergediag(   this.diagnosis ,this.recommendation  );
 
-      console.log(this.resed)
-      console.log(this.resed)
+      // console.log(this.resed)
+      // console.log(this.resed)
       this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
-      console.log(this.uniqueRecom)
+      // console.log(this.uniqueRecom)
 
       this.answeredDiag = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date !== undefined) //filter for UNanswered diagnosis
-      console.log(this.answeredDiag)
+      // console.log(this.answeredDiag)
 
       this.unansweredDiag = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined) //filter for answered diagnosis
-      console.log(this.unansweredDiag)
+      // console.log(this.unansweredDiag)
       }
  
   
 
 
     })
+
+  });
     
   }
   onSubmit(): void{
@@ -135,7 +147,7 @@ export class DiagnosisComponent implements OnInit {
               
                   // this.loader=false
                 
-                  console.log(data)
+                  // console.log(data)
                   this.toastr.success('Sober Space Received Your Message');
                   this.form.resetForm({})
            
@@ -143,15 +155,19 @@ export class DiagnosisComponent implements OnInit {
                 },
                 (err) => {
                   // this.loader=false
-                 console.log(err)
+                //  console.log(err)
                  this.toastr.error('Check Your Details ');
               
                 });
             } else if (result === 'no') {
                 // TODO: Replace the following line with your code.
-                console.log('User clicked no.');
+                // console.log('User clicked no.');
             }
         }
     })
+}
+
+ngOnDestroy() {
+  this.subscription.unsubscribe();
 }
 }

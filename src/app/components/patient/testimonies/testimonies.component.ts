@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { TestimoniesService } from 'src/app/services/testimonies.service';
 import { ApproveService } from 'src/app/services/approve.service';
+import { Observable, Subscription, timer } from 'rxjs';
 declare function mergeByTesti(diagnosis:any,recommendation:any):any
 export interface seenObject {
   testimony_date:string;
@@ -27,7 +28,10 @@ export interface unseenClass {
   templateUrl: './testimonies.component.html',
   styleUrls: ['./testimonies.component.css']
 })
-export class TestimoniesComponent implements OnInit {
+export class TestimoniesComponent implements OnInit , OnDestroy {
+  subscription!: Subscription;
+  everyFiveSeconds: Observable<number> = timer(0, 5000);
+  
   @ViewChild('f') form!:NgForm
   @ViewChild('openDialogDia') openDialogDia!: TemplateRef<any>;
   testimony: any;
@@ -69,43 +73,48 @@ export class TestimoniesComponent implements OnInit {
   displayedColumns: string[] = ['testimony_date','testimony_subject', 'testimony_message','testimony_location'];
   dataSource1 = new MatTableDataSource([...this.unansweredDiag ]);
   ngOnInit(): void {
+
+    this.subscription = this.everyFiveSeconds.subscribe(() => {
+
     this.username = localStorage.getItem('username')
     this.user_id = localStorage.getItem('user_id')
-    console.log(this.username)
+    // console.log(this.username)
 
     this.testimonyService.getTestimonies().subscribe((res:any[])=>{
       this.testimony=res
-      console.log(this.testimony)
+      // console.log(this.testimony)
 
     })
     this.approveService.getApproval().subscribe((res:any[])=>{
       this.approve=res
-      console.log(this.approve) 
+      // console.log(this.approve) 
       if(this.testimony!==undefined && this.approve !==undefined){
         this.mergeApprove =mergeByTesti(   this.testimony,this.approve  );
 
-            console.log( this.mergeApprove) 
+            // console.log( this.mergeApprove) 
 
       this.uniqueTestimonies = this.mergeApprove.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
-      console.log(this.uniqueTestimonies)
+      // console.log(this.uniqueTestimonies)
 
       this.unansweredDiag = this.uniqueTestimonies.filter((uniqueTestimonies:any) => uniqueTestimonies.approve_date === undefined) //filter for answered testimonies
-      console.log(this.unansweredDiag)
+      // console.log(this.unansweredDiag)
 
 
       this.answeredTestimonies = this.uniqueTestimonies.filter((uniqueTestimonies:any) => uniqueTestimonies.approve_date !== undefined) //filter for answered testimonies
-      console.log(this.answeredTestimonies)
+      // console.log(this.answeredTestimonies)
       
       this.approvedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'T') //filter for APPROVED testimonies
-      console.log(this.approvedTestimonies)
+      // console.log(this.approvedTestimonies)
 
       this.unApprovedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'F') //filter for DISAPPROVED testimonies
-      console.log(this.unApprovedTestimonies)
+      // console.log(this.unApprovedTestimonies)
       }
 
 
   
     })
+
+  });
   }
   openDialogD() {
     let dialogRef = this.dialog.open(this.openDialogDia);
@@ -119,7 +128,7 @@ export class TestimoniesComponent implements OnInit {
                   
                       // this.loader=false
                     
-                      console.log(data)
+                      // console.log(data)
                       this.toastr.success('Sober Space Received Your Message');
                       this.form.resetForm({})
                
@@ -127,14 +136,14 @@ export class TestimoniesComponent implements OnInit {
                     },
                     (err) => {
                       // this.loader=false
-                     console.log(err)
+                    //  console.log(err)
                      this.toastr.error('Check Your Details ');
                   
                     });
                     // );
                 } else if (result === 'no') {
                     // TODO: Replace the following line with your code.
-                    console.log('User clicked no.');
+                    // console.log('User clicked no.');
                 }
             }
         })
@@ -148,7 +157,7 @@ export class TestimoniesComponent implements OnInit {
     
         // this.loader=false
       
-        console.log(data)
+        // console.log(data)
         this.toastr.success('Sober Space Received Your Message');
         this.form.resetForm({})
  
@@ -156,12 +165,14 @@ export class TestimoniesComponent implements OnInit {
       },
       (err) => {
         // this.loader=false
-       console.log(err)
+      //  console.log(err)
        this.toastr.error('Check Your Details ');
     
       });
       // );
       // this.dialogRef.close();
   }
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

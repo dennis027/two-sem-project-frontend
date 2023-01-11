@@ -1,10 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AnswersService } from 'src/app/services/answers.service';
 import { QuestionsService } from 'src/app/services/questions.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription, Observable, timer } from 'rxjs';
 declare function mergeById(questions:any,answers:any):any
 
 export interface seenObject {
@@ -27,7 +28,10 @@ export interface unseenClass {
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.css']
 })
-export class QuestionsComponent implements OnInit {
+export class QuestionsComponent implements OnInit , OnDestroy {
+  subscription!: Subscription;
+  everyFiveSeconds: Observable<number> = timer(0, 5000);
+  
   @ViewChild('openDialogQues') openDialogQues!: TemplateRef<any>;
   questions: any;
   answers: any;
@@ -58,37 +62,42 @@ export class QuestionsComponent implements OnInit {
   displayedColumns: string[] = ['question_date','question_subject', 'question_message'];
   dataSource1 = new MatTableDataSource([...this.uniqueUnanswed ]);
   ngOnInit(): void {
+
+    this.subscription = this.everyFiveSeconds.subscribe(() => {
+  
+
   
     this.username = localStorage.getItem('username')
     this.user_id = localStorage.getItem('user_id')
-    console.log(this.username)
+    // console.log(this.username)
     // mergeById(Array,Array)
     this.questionService.getQuestions().subscribe((res: any[]) => {
       this.questions = res;
-      console.log(this.questions)
+      // console.log(this.questions)
     })
     this.answersService.getAnswers().subscribe((res:any[]) =>{
       this.answers=res;
-      console.log(this.answers)
+      // console.log(this.answers)
         if(this.questions !==undefined && this.answers !==undefined){
             this.mergeQA = mergeById( this.questions, this.answers);
 
-        console.log(this.mergeQA)
+        // console.log(this.mergeQA)
 
         this.uniqueQA = this.mergeQA.filter((id:any) => id.user == this.user_id)
-        console.log(this.uniqueQA)
+        // console.log(this.uniqueQA)
        
         this.uniqueAnswerd = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date !== undefined) //filter for answered QUESTIONS
-        console.log(this.uniqueAnswerd)
+        // console.log(this.uniqueAnswerd)
 
 
         this.uniqueUnanswed = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date === undefined) //filter for UNanswered QUESTIONS
-        console.log(this.uniqueUnanswed)
+        // console.log(this.uniqueUnanswed)
 
         }
       
   
     })
+  });
   }
   openDialogQ() {
     let dialogRef = this.dialog.open(this.openDialogQues);
@@ -102,7 +111,7 @@ export class QuestionsComponent implements OnInit {
               
                   // this.loader=false
                 
-                  console.log(data)
+                  // console.log(data)
                   this.toastr.success('Sober Space Received Your Message');
                   this.form.resetForm({})
            
@@ -110,7 +119,7 @@ export class QuestionsComponent implements OnInit {
                 },
                 (err) => {
                   // this.loader=false
-                 console.log(err)
+                //  console.log(err)
                  this.toastr.error('Check Your Details ');
               
                 });
@@ -127,4 +136,9 @@ export class QuestionsComponent implements OnInit {
   onSubmit(): void{
 
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
 }
