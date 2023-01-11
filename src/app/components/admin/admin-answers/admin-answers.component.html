@@ -127,17 +127,4 @@
   
   
   <br>
-  <form class="example-form" (ngSubmit)=" onUpdate()" name="uptFunction" #updatAnswers="ngForm" class="text-center">
-    <mat-form-field appearance="outline" style="width: 100%;">
-      <mat-label>Subject</mat-label>
-      <input matInput placeholder="Your Subject" name="answer_subject" [(ngModel)]="updateAnswer.answer_subject" #answer_subject="ngModel" matInput type="text" required>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="outline" style="width: 100%;">
-    <mat-label>Message</mat-label>
-      <textarea style="height: 70px;" matInput placeholder="Your Message" name="answer_message" [(ngModel)]="updateAnswer.answer_message" #answer_message="ngModel" matInput type="text" required></textarea>
-      </mat-form-field>
-   <br>
-  
-   <button type="submit" mat-button >Submit</button>
-   </form>
+ 
