@@ -33,6 +33,7 @@ export class AccountsComponent implements OnInit {
   @ViewChild('adminDialog') adminDialog!: TemplateRef<any>;
   @ViewChild('professionalDialog') professionalDialog!: TemplateRef<any>;
   @ViewChild('addictsDialog') addictsDialog!: TemplateRef<any>;
+  @ViewChild('deleteAccountDialog') deleteAccountDialog!: TemplateRef<any>;
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
@@ -66,6 +67,7 @@ export class AccountsComponent implements OnInit {
   }
   @ViewChild('f') form!:NgForm
   users:any
+  usrname:any
   hide = true;
   hide1=true
   // admin:any
@@ -78,15 +80,15 @@ export class AccountsComponent implements OnInit {
 
 
  addicts: usersObject[] = [    ];
-  displayedColumns: string[] = ['username', 'email', 'phone'];
+  displayedColumns: string[] = ['username', 'email', 'phone','actions'];
   dataSource = new MatTableDataSource([...this.addicts]);
 
   professional: usersObject[] = [    ];
-  displayedColumns1: string[] = ['username', 'email', 'phone'];
+  displayedColumns1: string[] = ['username', 'email', 'phone','actions'];
   dataSource1 = new MatTableDataSource([...this.professional]);
 
   admin: usersObject[] = [    ];
-  displayedColumns2: string[] = ['username', 'email', 'phone'];
+  displayedColumns2: string[] = ['username', 'email', 'phone','actions'];
   dataSource2 = new MatTableDataSource([...this.admin]);
 
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
@@ -209,6 +211,10 @@ export class AccountsComponent implements OnInit {
         }
     })
   }
+
+
+
+
   callAdmin(){
     let dialogRef = this.dialog.open(this.adminDialog);
     dialogRef.afterClosed().subscribe(result => {
@@ -225,4 +231,25 @@ export class AccountsComponent implements OnInit {
     })
   }
 
+
+  deleteUser(id:any) {
+    let dialogRef = this.dialog.open(this.deleteAccountDialog);
+    let currentData = this.users.find((p: { id: any; }) =>{return p.id ===  id});
+   this.usrname=currentData.username
+    dialogRef.afterClosed().subscribe(result => {
+
+        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+        if (result !== undefined) {
+            if (result === 'yes') {
+              this.usersService.deleteUser(id).subscribe(
+                // (msg) => console.log(msg),
+                // (error) => console.log(error)
+              );
+            } else if (result === 'no') {
+                // TODO: Replace the following line with your code.
+                console.log('User clicked no.');
+            }
+        }
+    })
+}
 }

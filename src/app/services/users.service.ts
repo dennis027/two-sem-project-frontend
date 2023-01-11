@@ -22,4 +22,8 @@ export class UsersService {
     return this.httpClient.post(this.usersAPI,userData,httpOptions)
   }
 
+  deleteUser (id: number): Observable<any[]> {
+    return this.httpClient.delete<any[]>(this.usersAPI + id+'/');  
+  }
+
 }

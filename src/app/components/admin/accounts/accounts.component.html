@@ -33,11 +33,11 @@
                   
                       <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef>
-                          <button mat-icon-button>
+                        <td mat-cell *matCellDef="let element">
+                          <!-- <button mat-icon-button>
                             <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-icon-button>
+                          </button> -->
+                          <button mat-icon-button (click)=" deleteUser(element.id) ">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </td>
@@ -80,11 +80,11 @@
                   
                       <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef>
-                          <button mat-icon-button>
+                        <td mat-cell *matCellDef="let element">
+                          <!-- <button mat-icon-button>
                             <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-icon-button>
+                          </button> -->
+                          <button mat-icon-button  (click)=" deleteUser(element.id) ">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </td>
@@ -127,11 +127,11 @@
                   
                       <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef>
-                          <button mat-icon-button>
+                        <td mat-cell *matCellDef="let element">
+                          <!-- <button mat-icon-button>
                             <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-icon-button>
+                          </button> -->
+                          <button mat-icon-button  (click)=" deleteUser(element.id) ">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </td>
@@ -363,3 +363,13 @@
         </mat-dialog-actions>
     </ng-template>
     
+
+
+    <ng-template #deleteAccountDialog>
+        <h2 matDialogTitle>Are you sure you want to delete Account!</h2>
+        <h2 class="text-center"style="color:blue"><b><i>{{usrname}}</i></b></h2>
+        <mat-dialog-actions align="end">
+            <button mat-button matDialogClose="no"> Cancel</button>
+            <button mat-raised-button color="warn" matDialogClose="yes">Delete</button>
+        </mat-dialog-actions>
+    </ng-template>
