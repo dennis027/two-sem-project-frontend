@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { TestimoniesService } from 'src/app/services/testimonies.service';
 import { ApproveService } from 'src/app/services/approve.service';
+import { Observable, Subscription, timer } from 'rxjs';
 declare function mergeByTesti(diagnosis:any,recommendation:any):any
 export interface seenObject {
   testimony_date:string;
@@ -30,8 +31,9 @@ export interface unseenClass {
   templateUrl: './approval.component.html',
   styleUrls: ['./approval.component.css']
 })
-export class ApprovalComponent implements OnInit {
-
+export class ApprovalComponent implements OnInit , OnDestroy {
+  subscription!: Subscription;
+  everyFiveSeconds: Observable<number> = timer(0, 5000);
   approveObject: any = {
     testimony_id: null,
     user: null,
@@ -90,48 +92,56 @@ export class ApprovalComponent implements OnInit {
   displayedColumns: string[] = ['testimony_date','testimony_subject', 'testimony_message','testimony_location','actions'];
   dataSource1 = new MatTableDataSource([...this.unansweredDiag ]);
   ngOnInit(): void {
+
+    this.subscription = this.everyFiveSeconds.subscribe(() => {
+ 
+
+
+
     this.username = localStorage.getItem('username')
     this.user_id = localStorage.getItem('user_id')
-    console.log(this.username)
+    // console.log(this.username)
 
     this.testimonyService.getTestimonies().subscribe((res:any[])=>{
       this.testimony=res
-      console.log(this.testimony)
+      // console.log(this.testimony)
 
     })
     this.approveService.getApproval().subscribe((res:any[])=>{
       this.approve=res
-      console.log(this.approve) 
+      // console.log(this.approve) 
       if(this.testimony!==undefined && this.approve !==undefined){
         this.mergeApprove =mergeByTesti(   this.testimony,this.approve  );
 
-            console.log( this.mergeApprove) 
+            // console.log( this.mergeApprove) 
 
       this.uniqueTestimonies = this.mergeApprove.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
-      console.log(this.uniqueTestimonies)
+      // console.log(this.uniqueTestimonies)
 
       this.unansweredDiag = this.mergeApprove.filter((mergeApprove:any) => mergeApprove.approve_date === undefined) //filter for answered testimonies
-      console.log(this.unansweredDiag)
+      // console.log(this.unansweredDiag)
 
 
       this.answeredTestimonies = this.mergeApprove.filter((mergeApprove:any) => mergeApprove.approve_date !== undefined) //filter for answered testimonies
-      console.log(this.answeredTestimonies)
+      // console.log(this.answeredTestimonies)
       
       this.approvedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'T') //filter for APPROVED testimonies
-      console.log(this.approvedTestimonies)
+      // console.log(this.approvedTestimonies)
 
       this.unApprovedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'F') //filter for DISAPPROVED testimonies
-      console.log(this.unApprovedTestimonies)
+      // console.log(this.unApprovedTestimonies)
       }
 
 
   
     })
+
+  });
   }
 
   getTrue(id:any){
     let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData)
+    // console.log(currentData)
     const approveObject = {
       testimony_id: currentData.id,
       user: this.user_id,
@@ -153,7 +163,7 @@ export class ApprovalComponent implements OnInit {
   }
   getFalse(id:any){
     let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData)
+    // console.log(currentData)
     const approveObject = {
       testimony_id: currentData.id,
       user: this.user_id,
@@ -176,9 +186,9 @@ export class ApprovalComponent implements OnInit {
 
   disAppApproved(id:any){
     let currentData = this.approve.find((p: { testimony_id: any; }) =>{return p.testimony_id ===  id});
-    console.log(currentData)
+    // console.log(currentData)
     this.ident=currentData.id
-    console.log(this.ident)
+    // console.log(this.ident)
     const updateObject = {
       id:currentData.id,
       testimony_id: currentData.testimony_id,
@@ -192,9 +202,9 @@ export class ApprovalComponent implements OnInit {
 
   appDisapproved(id:any){
     let currentData = this.approve.find((p: { testimony_id: any; }) =>{return p.testimony_id ===  id});
-    console.log(currentData)
+    // console.log(currentData)
     this.ident=currentData.id
-    console.log(this.ident)
+    // console.log(this.ident)
     const updateObject = {
       id:currentData.id,
       testimony_id: currentData.testimony_id,
@@ -210,19 +220,22 @@ export class ApprovalComponent implements OnInit {
   openDeleteDialog(id:any) {
     let dialogRef = this.dialog.open(this.deleteDialog);
     let currentData = this.testimony.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData.id)
+    // console.log(currentData.id)
     dialogRef.afterClosed().subscribe(result => {
         // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
         if (result !== undefined) {
             if (result === 'yes') {
               this.testimonyService.deleteData(id).subscribe(
-                (msg) => console.log(msg),
-                (error) => console.log(error)
+                // (msg) => console.log(msg),
+                // (error) => console.log(error)
               );
             } else if (result === 'no') {
            
             }
         }
     })
+}
+ngOnDestroy() {
+  this.subscription.unsubscribe();
 }
 }
