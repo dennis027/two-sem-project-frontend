@@ -24,6 +24,8 @@ import { AdminApproveComponent } from './components/admin/admin-approve/admin-ap
 import { AdminRecommendationsComponent } from './components/admin/admin-recommendations/admin-recommendations.component';
 import { ProfHomeComponent } from './components/professional/prof-home/prof-home.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
+import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -37,7 +39,7 @@ const routes: Routes = [
        {path:'home',component : HomeComponent,outlet:'addict'},
        {path:'diagnosis',component:DiagnosisComponent,outlet:'addict'},
        {path:'questions',component:QuestionsComponent,outlet:'addict'},
-       {path:'testimonies',component:TestimoniesComponent,outlet:'addict'}
+       {path:'testimonies',component:TestimoniesComponent,outlet:'addict'},
   ]},
   {path:'admin',component:AdminComponent,
       children:[
@@ -45,14 +47,16 @@ const routes: Routes = [
         {path:'answers' , component:AdminAnswersComponent, outlet:'admin'},
         {path:'approve' , component:AdminApproveComponent, outlet:'admin'},
         {path:'recommend',component:AdminRecommendationsComponent, outlet:'admin'},
-        {path:'home',component:AdminHomeComponent,outlet:'admin'}
+        {path:'home',component:AdminHomeComponent,outlet:'admin'},
+        {path:'contact',component:AdminContactsComponent,outlet:'admin'}
       ]},
   {path:'professional',component:ProfessionalComponent,
       children:[
         {path:'recommend',component:RecommendationsComponent,outlet:'prof'},
         {path:'answer',component:AnswersComponent,outlet:'prof'},
         {path:'approval',component:ApprovalComponent,outlet:'prof'},
-        {path:'home',component:ProfHomeComponent,outlet:'prof'}
+        {path:'home',component:ProfHomeComponent,outlet:'prof'},
+        {path:'contact',component:ProfContactComponent,outlet:'prof'}
       ]},
   {path:'contact',component:ContactComponent},
   {path:'whoweare',component:AboutUsComponent},

@@ -81,29 +81,29 @@ export class AnswersComponent implements OnInit {
   
     this.username = localStorage.getItem('username')
     this.user_id = localStorage.getItem('user_id')
-    console.log(this.username)
+    // console.log(this.username)
     // mergeById(Array,Array)
     this.questionService.getQuestions().subscribe((res: any[]) => {
       this.questions = res;
-      console.log(this.questions)
+      // console.log(this.questions)
     })
     this.answersService.getAnswers().subscribe((res:any[]) =>{
       this.answers=res;
-      console.log(this.answers)
+      // console.log(this.answers)
         if(this.questions !==undefined && this.answers !==undefined){
             this.mergeQA = mergeById( this.questions, this.answers);
 
-        console.log(this.mergeQA)
+        // console.log(this.mergeQA)
 
         this.uniqueQA = this.mergeQA.filter((id:any) => id.user == this.user_id)
-        console.log(this.uniqueQA)
+        // console.log(this.uniqueQA)
        
         this.uniqueAnswerd = this.mergeQA.filter((mergeQA:any) => mergeQA.answer_date !== undefined) //filter for answered QUESTIONS
-        console.log(this.uniqueAnswerd)
+        // console.log(this.uniqueAnswerd)
 
 
         this.uniqueUnanswed = this.mergeQA.filter((mergeQA:any) => mergeQA.answer_date === undefined) //filter for UNanswered QUESTIONS
-        console.log(this.uniqueUnanswed)
+        // console.log(this.uniqueUnanswed)
 
         }
       
@@ -113,7 +113,7 @@ export class AnswersComponent implements OnInit {
 
   onGetId(id:any){
     let currentData = this.questions.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData.id)
+    // console.log(currentData.id)
     this.ident=currentData.id
   }
   onSubmit(){
@@ -128,12 +128,12 @@ export class AnswersComponent implements OnInit {
   this.answersService.answerQ(answer).subscribe(
     (data)=>{
         
-      console.log(data)
+      // console.log(data)
       this.toastr.success('Sober Space Received Your Message');
       this.form.resetForm({})
     },
     (err)=>{
-      console.log(err)
+      // console.log(err)
       this.toastr.error('Check Your Details ');
     }
   )
@@ -153,7 +153,7 @@ export class AnswersComponent implements OnInit {
   }
   updateAnswers(id:any){
     let currentData = this.mergeQA.find((p: { id: any; }) =>{return p.id ===  id});
-    console.log(currentData)
+    // console.log(currentData)
     this.ide=currentData.id
     this.dat=currentData.answer_date
     this.qid = currentData.question_id

@@ -102,6 +102,8 @@ import { AdminRecommendationsComponent } from './components/admin/admin-recommen
 import { ProfHomeComponent } from './components/professional/prof-home/prof-home.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { MatTableResponsiveDirective } from './directive/mat-table-responsive.directive';
+import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
+import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
 
 
 
@@ -135,7 +137,9 @@ import { MatTableResponsiveDirective } from './directive/mat-table-responsive.di
     ProfHomeComponent,
     AdminHomeComponent,
     MatTableResponsiveDirective,
- 
+    ProfContactComponent,
+    AdminContactsComponent,
+  
   ], 
   imports: [ 
     BrowserAnimationsModule,
