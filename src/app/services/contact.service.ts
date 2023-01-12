@@ -19,9 +19,11 @@ export class ContactService {
     return this.httpClient.get<any[]>(this.contactAPI);
   }
   postContact(name:string,email:string,subject:string,message:string): Observable<any>{
-    return this.http.post(this.contactAPI,{
-      
+    return this.http.post(this.contactAPI,{   
       name,email,subject,message
     },httpOptions)
+  }
+  deleteData (id: number): Observable<any[]> {
+    return this.httpClient.delete<any[]>(this.contactAPI + id+'/');  
   }
 }
