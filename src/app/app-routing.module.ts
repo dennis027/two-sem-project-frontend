@@ -26,6 +26,7 @@ import { ProfHomeComponent } from './components/professional/prof-home/prof-home
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
 import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
+import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -60,7 +61,8 @@ const routes: Routes = [
       ]},
   {path:'contact',component:ContactComponent},
   {path:'whoweare',component:AboutUsComponent},
-  {path:"loginnavbar",component:LoggedNavbarComponent}
+  {path:"loginnavbar",component:LoggedNavbarComponent},
+  {path:'testimony',component:TestimonyHomeComponent}
 ];
 
 @NgModule({

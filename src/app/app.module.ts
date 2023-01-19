@@ -104,6 +104,7 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { MatTableResponsiveDirective } from './directive/mat-table-responsive.directive';
 import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
 import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
+import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
 
 
 
@@ -139,6 +140,7 @@ import { AdminContactsComponent } from './components/admin/admin-contacts/admin-
     MatTableResponsiveDirective,
     ProfContactComponent,
     AdminContactsComponent,
+    TestimonyHomeComponent,
   
   ], 
   imports: [ 

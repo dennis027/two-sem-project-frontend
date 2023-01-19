@@ -18,6 +18,7 @@ import { ContactService } from 'src/app/services/contact.service';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef,  OnDestroy} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { UsersService } from 'src/app/services/users.service';
 declare function mergeById(questions:any,answers:any):any
 declare function mergediag(diagnosis:any,recommendation:any):any
 declare function mergeByTesti(diagnosis:any,recommendation:any):any
@@ -56,6 +57,14 @@ export class AdminComponent implements OnInit {
   uniqueAnswerd:any
   uniqueUnanswed:any
   uniqueQA:any
+  questionsLength:any
+  answersLength:any
+  diagnosisLength:any
+  AsweredLength:any
+  testimonyLength:any
+  ApprovedLenth:any
+  users:any
+  usersLength:any
   @ViewChild('snav', { static: false }) usuarioMenu!: MatSidenav;
 
   panelOpenState = false;
@@ -75,6 +84,7 @@ export class AdminComponent implements OnInit {
      private testimonyService:TestimoniesService,
      private contactService:ContactService,
      changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, 
+     private usersService:UsersService
      
      ) { 
       this.mobileQuery = media.matchMedia('(max-width: 896px)',);
@@ -91,7 +101,7 @@ export class AdminComponent implements OnInit {
     // mergeById(Array,Array)
     this.questionService.getQuestions().subscribe((res: any[]) => {
       this.questions = res;
-      // console.log(this.questions)
+      this.questionsLength=this.questions.length
     })
     this.answersService.getAnswers().subscribe((res:any[]) =>{
       this.answers=res;
@@ -104,12 +114,13 @@ export class AdminComponent implements OnInit {
         this.uniqueQA = this.mergeQA.filter((id:any) => id.user == this.user_id)
         // console.log(this.uniqueQA)
        
-        this.uniqueAnswerd = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date !== undefined) //filter for answered QUESTIONS
-        // console.log(this.uniqueAnswerd)
+        this.uniqueAnswerd = this.mergeQA.filter((mergeQA:any) => mergeQA.answer_date !== undefined) //filter for answered QUESTIONS
+        // console.log(this.uniqueAnswerd.length)
+        this.AsweredLength=this.uniqueAnswerd.length
 
 
-        this.uniqueUnanswed = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date === undefined) //filter for UNanswered QUESTIONS
-        // console.log(this.uniqueUnanswed)
+        this.uniqueUnanswed = this.mergeQA.filter((mergeQA:any) => mergeQA.answer_date === undefined) //filter for UNanswered QUESTIONS
+        // console.log(this.uniqueUnanswed.length)
 
         }
       
@@ -119,6 +130,7 @@ export class AdminComponent implements OnInit {
 
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
+      this.diagnosisLength=this.diagnosis.length
       // console.log(this.diagnosis)    
       this.uniqueDiagnosis = this.diagnosis.filter((id:any) => id.user == this.user_id)
       // console.log(this.uniqueDiagnosis)
@@ -137,10 +149,10 @@ export class AdminComponent implements OnInit {
       this.uniqueRecom = this.resed.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
       // console.log(this.uniqueRecom)
 
-      this.answeredDiag = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date !== undefined) //filter for UNanswered diagnosis
+      this.answeredDiag = this.resed.filter((resed:any) => resed.recommendation_date !== undefined) //filter for UNanswered diagnosis
       // console.log(this.answeredDiag)
 
-      this.answeredTestimonies = this.uniqueRecom.filter((uniqueRecom:any) => uniqueRecom.recommendation_date === undefined) //filter for answered diagnosis
+      this.answeredTestimonies = this.resed.filter((resed:any) => resed.recommendation_date === undefined) //filter for answered diagnosis
       // console.log(this.answeredTestimonies)
       }
  
@@ -152,6 +164,7 @@ export class AdminComponent implements OnInit {
     this.testimonyService.getTestimonies().subscribe((res:any[])=>{
       this.testimony=res
       // console.log(this.testimony)
+      this.testimonyLength=this.testimony.length
 
     })
     this.approveService.getApproval().subscribe((res:any[])=>{
@@ -165,15 +178,16 @@ export class AdminComponent implements OnInit {
       this.uniqueTestimonies = this.mergeApprove.filter((id:any) => id.user == this.user_id) //FILTERING DIAGNOSIS ACCORDING TO USER ID
       // console.log(this.uniqueTestimonies)
 
-      this.unansweredDiag = this.uniqueTestimonies.filter((uniqueTestimonies:any) => uniqueTestimonies.approve_date === undefined) //filter for answered testimonies
+      this.unansweredDiag = this.mergeApprove.filter((mergeApprove:any) => mergeApprove.approve_date === undefined) //filter for answered testimonies
       // console.log(this.unansweredDiag)
 
 
-      this.answeredTestimonies = this.uniqueTestimonies.filter((uniqueTestimonies:any) => uniqueTestimonies.approve_date !== undefined) //filter for answered testimonies
+      this.answeredTestimonies = this.mergeApprove.filter((mergeApprove:any) => mergeApprove.approve_date !== undefined) //filter for answered testimonies
       // console.log(this.answeredTestimonies)
       
       this.approvedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'T') //filter for APPROVED testimonies
       // console.log(this.approvedTestimonies)
+      this.ApprovedLenth=this.approvedTestimonies.length 
 
       this.unApprovedTestimonies = this.answeredTestimonies.filter((answeredTestimonies:any) => answeredTestimonies.approveTF === 'F') //filter for DISAPPROVED testimonies
       // console.log(this.unApprovedTestimonies)
@@ -188,6 +202,10 @@ export class AdminComponent implements OnInit {
       // console.log(this.contact)
    })
 
+   this.usersService.getUsers().subscribe((res:any)=>{
+    this.users=res
+    this.usersLength = this.users.length
+   })
 
   }
   public closeSidenav() {

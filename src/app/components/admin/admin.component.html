@@ -14,7 +14,7 @@
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'answers'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4> Answers </h4> </a> <br>
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'approve'}}]"  (click)="closeSidenav()" >  <mat-icon>done_outline</mat-icon> <h4>Approves </h4> </a> <br>
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'contact'}}]"  (click)="closeSidenav()" >  <mat-icon>contacts</mat-icon> <h4>Contact </h4> </a> <br>
-
+<mat-icon>exit_to_app</mat-icon>
 </mat-nav-list>
 </mat-sidenav>
 
@@ -28,35 +28,58 @@
   </mat-toolbar>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <mat-card>
           <mat-card-title class="tes"> 
             <mat-icon>supervised_user_circle</mat-icon>
             App Users
+            <h2 style="background-color: blanchedalmond;" class="text-center">{{usersLength}}</h2>
           </mat-card-title>
         </mat-card>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <mat-card>
           <mat-card-title class="tes">
             <mat-icon> local_hospital</mat-icon>
            Diagnosis Done
+           <h2 style="background-color: blanchedalmond;" class="text-center">{{diagnosisLength}}</h2>
           </mat-card-title>
         </mat-card>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <mat-card>
           <mat-card-title class="tes">
             <mat-icon> local_hospital</mat-icon>
-            Question Asked
+            Question Asked 
+            <h2 style="background-color: blanchedalmond;" class="text-center">{{questionsLength}}</h2>
           </mat-card-title>
         </mat-card>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
+        <mat-card>
+          <mat-card-title class="tes">
+            <mat-icon>announcement</mat-icon>
+            Question Answered
+            <h2 style="background-color: blanchedalmond;" class="text-center">{{AsweredLength}}</h2>
+          </mat-card-title>
+        </mat-card>
+      </div>
+      <div class="col-md-2">
         <mat-card>
           <mat-card-title class="tes">
             <mat-icon> question_answer</mat-icon>
-            Question Answered
+           Testimonies Posted
+           <h2 style="background-color: blanchedalmond;" class="text-center"> {{testimonyLength}}</h2>
+          
+          </mat-card-title>
+        </mat-card>
+      </div>
+      <div class="col-md-2">
+        <mat-card>
+          <mat-card-title class="tes">
+            <mat-icon> question_answer</mat-icon>
+            Testimonies Approved
+            <h2 style="background-color: blanchedalmond;" class="text-center"> {{ApprovedLenth}}</h2> 
           </mat-card-title>
         </mat-card>
       </div>
