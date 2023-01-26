@@ -58,15 +58,15 @@ export class TestimoniesComponent implements OnInit , OnDestroy {
 
   ) {}
   answeredTestimonies : seenObject[] = [ ];
-  displayedSeen: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF'];
+  displayedSeen: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date'];
   dataSource = new MatTableDataSource([...this.answeredTestimonies ]);
 
   approvedTestimonies : seenObject[] = [ ];
-  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF'];
+  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date'];
   dataSource3 = new MatTableDataSource([...this.approvedTestimonies ]);
 
   unApprovedTestimonies : seenObject[] = [ ];
-  displayedunApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date','approveTF'];
+  displayedunApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date'];
   dataSource2 = new MatTableDataSource([...this.unApprovedTestimonies ]);
 
    unansweredDiag: unseenClass[] = [ ];

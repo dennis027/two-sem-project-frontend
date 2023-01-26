@@ -84,7 +84,8 @@ export class AdminComponent implements OnInit {
      private testimonyService:TestimoniesService,
      private contactService:ContactService,
      changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, 
-     private usersService:UsersService
+     private usersService:UsersService,
+     private router: Router,
      
      ) { 
       this.mobileQuery = media.matchMedia('(max-width: 896px)',);
@@ -218,5 +219,10 @@ export class AdminComponent implements OnInit {
   }
    ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+  signOut(): void {
+    localStorage.clear();
+    this.router.navigate(['/']);
+
   }
 }

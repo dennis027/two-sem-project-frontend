@@ -4,7 +4,7 @@
   [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
 [fixedInViewport]="mobileQuery.matches" fixedTopGap="0" [opened]="mobileQuery.matches ? false : true">
-<mat-nav-list >
+<mat-nav-list style="width: auto; background-color: darkcyan; height: 100vh; " >
 
 
 <br>
@@ -14,7 +14,7 @@
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'answers'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4> Answers </h4> </a> <br>
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'approve'}}]"  (click)="closeSidenav()" >  <mat-icon>done_outline</mat-icon> <h4>Approves </h4> </a> <br>
 <a mat-list-item [routerLink]="['/admin', {outlets: {admin: 'contact'}}]"  (click)="closeSidenav()" >  <mat-icon>contacts</mat-icon> <h4>Contact </h4> </a> <br>
-<mat-icon>exit_to_app</mat-icon>
+<a mat-list-item href="/"> <mat-icon (click)="signOut()" style=" bottom: 20px;">exit_to_app</mat-icon> <h4>Sign OUt</h4></a>
 </mat-nav-list>
 </mat-sidenav>
 

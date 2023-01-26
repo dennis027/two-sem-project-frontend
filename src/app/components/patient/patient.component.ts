@@ -63,6 +63,7 @@ export class PatientComponent implements OnInit {
     private approveService:ApproveService,
     private testimonyService:TestimoniesService,
     private contactService:ContactService,
+    private router: Router,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,  ) {
     this.mobileQuery = media.matchMedia('(max-width: 896px)',);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -193,5 +194,10 @@ export class PatientComponent implements OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  // shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  signOut(): void {
+    localStorage.clear();
+    this.router.navigate(['/']);
+
+  }
+  
 }

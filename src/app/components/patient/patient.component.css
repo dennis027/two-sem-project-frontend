@@ -1,11 +1,12 @@
 #sideba{
     background-color: rgb(43, 107, 226);
     background-size: cover;
-    height: 50vh;
+   
 }
 #main-b{
     background-color: rgb(100, 100, 168);
     background-size: cover;
+    height: 100vh;
 } 
 
 .mat-sidenav-container {
