@@ -10,7 +10,6 @@
   <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'diagnosis'}}]"  (click)="closeSidenav()" >  <mat-icon>local_hospital</mat-icon> <h4>See Doctor </h4> </a> <br>
   <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'questions'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Questions and Answers </h4> </a> <br>
   <a mat-list-item [routerLink]="['/patient', {outlets: {addict: 'testimonies'}}]"  (click)="closeSidenav()" >  <mat-icon>question_answer</mat-icon> <h4>Testimonies </h4> </a> <br>
-  <a mat-list-item> <mat-icon (click)="signOut()" style=" bottom: 20px;">exit_to_app</mat-icon> <h4>Sign OUt</h4></a>
   <a mat-list-item href="/"> <mat-icon (click)="signOut()" style=" bottom: 20px;">exit_to_app</mat-icon> <h4>Sign OUt</h4></a>
 </mat-nav-list>
 </mat-sidenav>

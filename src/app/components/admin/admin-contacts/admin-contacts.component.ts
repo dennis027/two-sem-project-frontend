@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, ViewChild, OnInit, TemplateRef } from '@angular/core';
 import { Observable, Subscription, timer } from 'rxjs';
 import { ContactService } from 'src/app/services/contact.service';
-import {AfterViewInit,  ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';

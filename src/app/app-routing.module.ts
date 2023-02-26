@@ -27,6 +27,8 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
 import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
 import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -61,6 +63,8 @@ const routes: Routes = [
       ]},
   {path:'contact',component:ContactComponent},
   {path:'whoweare',component:AboutUsComponent},
+  {path:'forget-password',component:ForgetPasswordComponent},
+  {path:'api/password_reset',component:PasswordResetComponent},
   {path:"loginnavbar",component:LoggedNavbarComponent},
   {path:'testimony',component:TestimonyHomeComponent}
 ];

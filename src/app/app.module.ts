@@ -105,6 +105,8 @@ import { MatTableResponsiveDirective } from './directive/mat-table-responsive.di
 import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
 import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
 import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 
 
 
@@ -141,6 +143,8 @@ import { TestimonyHomeComponent } from './components/testimony-home/testimony-ho
     ProfContactComponent,
     AdminContactsComponent,
     TestimonyHomeComponent,
+    ForgetPasswordComponent,
+    PasswordResetComponent,
   
   ], 
   imports: [ 
