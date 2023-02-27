@@ -38,6 +38,8 @@
             </form>
             Not a member? <a routerLink="/sign-up">Create account</a>
           </mat-card>
+          <br>
+          <button mat-raised-button  (click)="openDialog()">Forget Password</button>
         </div>
         <div class="col-md-4"></div>
       </div>
@@ -46,4 +48,20 @@
   </div>
   </div>
 
+
+  <ng-template #successDialog>
+    <h2 matDialogTitle>Success!</h2>
+    <mat-card-content>
+      Email Successfully sent
+    </mat-card-content>
+    <mat-dialog-actions align="end">
+        <button mat-button matDialogClose="no">No</button>
+        <button mat-button matDialogClose="yes">Yes</button>
+    </mat-dialog-actions>
+</ng-template>
+
+
+
   <app-footer></app-footer>
+
+
