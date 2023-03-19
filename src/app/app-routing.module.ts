@@ -29,6 +29,7 @@ import { ProfContactComponent } from './components/professional/prof-contact/pro
 import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path:'footer',component:FooterComponent},
   {path:'login',component:LoginComponent},
   {path:'sign-up',component:SignUpComponent},
+  {path:'test', component:TestComponent},
   {path:'patient',component:PatientComponent,
       children:[
        {path:'home',component : HomeComponent,outlet:'addict'},

@@ -13,7 +13,7 @@ const httpOptions = {
 export class UsersService {
   usersAPI = environment.apiUrl + 'user/';
   reset_password_api=environment.apiUrl+'api/password_reset/'
-  new_password=environment.apiUrl+'/api/password_reset/confirm/'
+  new_password=environment.apiUrl+'api/password_reset/confirm/'
   constructor(private httpClient:HttpClient) { }
 
   getUsers():Observable<any[]>{

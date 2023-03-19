@@ -5,7 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 import { Subscription, Observable, timer } from 'rxjs';
 
 export interface seenObject {
@@ -45,7 +45,7 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
 
   @ViewChild('f') form!:NgForm
   @ViewChild('openDialogDia') openDialogDia!: TemplateRef<any>;
-
+  dialogRef!: MatDialogRef<TemplateRef<'openDialogDia'>>;
   data:any={
     user:null,
     diagnosis_subject:null,
@@ -56,6 +56,8 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
      private recommendationService:RecommendationsService,
      private toastr: ToastrService,
      private dialog: MatDialog,
+  
+
 
      ) { }
      answeredDiag : seenObject[] = [ ];
@@ -112,27 +114,27 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
     
   }
   onSubmit(): void{
-    // // this.loader=true
-    // let {user,diagnosis_subject,diagnosis_message}= this.data;
-    // this.diagnosisService.postDiagnois(user =this.user_id,diagnosis_subject,diagnosis_message,).subscribe(
-    //   (data) => {
+    // this.loader=true
+    let {user,diagnosis_subject,diagnosis_message}= this.data;
+    this.diagnosisService.postDiagnois(user =this.user_id,diagnosis_subject,diagnosis_message,).subscribe(
+      (data) => {
     
-    //     // this.loader=false
+        // this.loader=false
       
-    //     console.log(data)
-    //     this.toastr.success('Sober Space Received Your Message');
-    //     this.form.resetForm({})
- 
+        console.log(data)
+        this.toastr.success('Sober Space Received Your Message');
+        this.form.resetForm({})
+        this.dialog.closeAll()
      
-    //   },
-    //   (err) => {
-    //     // this.loader=false
-    //    console.log(err)
-    //    this.toastr.error('Check Your Details ');
+      },
+      (err) => {
+        // this.loader=false
+       console.log(err)
+       this.toastr.error('Check Your Details ');
     
-    //   });
-    //   // );
-    //   // this.dialogRef.close();
+      });
+      // );
+      // this.dialogRef.close();
   }
 
   openDialogD() {
@@ -150,7 +152,7 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
                   // console.log(data)
                   this.toastr.success('Sober Space Received Your Message');
                   this.form.resetForm({})
-           
+                  this.closeDialog()
                
                 },
                 (err) => {
@@ -165,6 +167,10 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
             }
         }
     })
+}
+closeDialog(){
+  console.log('hahaha')
+  this.dialogRef.close()
 }
 
 ngOnDestroy() {

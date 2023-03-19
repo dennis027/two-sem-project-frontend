@@ -134,7 +134,27 @@ export class QuestionsComponent implements OnInit , OnDestroy {
     })
 }
   onSubmit(): void{
-
+    let { user,question_subject,question_message}= this.data;
+    this.questionService.postQuestion(user =this.user_id,question_subject,question_message,).subscribe(
+      (data) => {
+    
+        // this.loader=false
+      
+        // console.log(data)
+        this.toastr.success('Sober Space Received Your Message');
+        this.form.resetForm({})
+        this.dialog.closeAll()
+     
+      },
+      (err) => {
+        // this.loader=false
+      //  console.log(err)
+       this.toastr.error('Check Your Details ');
+    
+      });
+      // );
+      // this.dialogRef.close();
+      
   }
 
   ngOnDestroy() {

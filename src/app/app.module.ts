@@ -107,6 +107,7 @@ import { AdminContactsComponent } from './components/admin/admin-contacts/admin-
 import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { TestComponent } from './components/test/test.component';
 
 
 
@@ -145,6 +146,7 @@ import { PasswordResetComponent } from './components/password-reset/password-res
     TestimonyHomeComponent,
     ForgetPasswordComponent,
     PasswordResetComponent,
+    TestComponent,
   
   ], 
   imports: [ 

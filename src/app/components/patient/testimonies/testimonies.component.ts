@@ -131,7 +131,7 @@ export class TestimoniesComponent implements OnInit , OnDestroy {
                       // console.log(data)
                       this.toastr.success('Sober Space Received Your Message');
                       this.form.resetForm({})
-               
+                      this.dialog.closeAll()
                    
                     },
                     (err) => {
@@ -160,7 +160,7 @@ export class TestimoniesComponent implements OnInit , OnDestroy {
         // console.log(data)
         this.toastr.success('Sober Space Received Your Message');
         this.form.resetForm({})
- 
+        this.dialog.closeAll()
      
       },
       (err) => {

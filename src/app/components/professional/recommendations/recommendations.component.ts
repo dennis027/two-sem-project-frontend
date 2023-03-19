@@ -113,7 +113,27 @@ export class RecommendationsComponent implements OnInit , OnDestroy {
   });
   }
   onSubmit(): void{
- 
+    const reccom = {
+      diagnosis_id:this.my_id,
+      user:this.user_id,
+      recommendation_subject:this.reccom.recommendation_subject,
+      recommendation_message:this.reccom.recommendation_message,
+     }
+
+     this.recommendationService.postRecommendation(reccom).subscribe(
+      (res)=>{
+      
+        this.success=res
+        this.toastr.success("Replied Successfully")
+        this.form.resetForm()
+        this.dialog.closeAll()
+      },
+      (err)=>{
+     
+        this.failed=err
+        this.toastr.error("Error")
+      }
+    )
   }
 
   openDialogD() {

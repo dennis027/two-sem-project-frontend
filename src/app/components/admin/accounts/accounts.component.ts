@@ -132,6 +132,7 @@ export class AccountsComponent implements OnInit , OnDestroy {
         // console.log(data)
         this.toastr.success('Admin Added Successfully');
         this.form.resetForm({})
+        this.dialog.closeAll()
       },
       (err)=>{
         // console.log(err)
@@ -155,6 +156,7 @@ export class AccountsComponent implements OnInit , OnDestroy {
         // console.log(data)
         this.toastr.success('Professional Added Successfully');
         this.form.resetForm({})
+        this.dialog.closeAll()
       },
       (err)=>{
         // console.log(err)
@@ -178,6 +180,7 @@ export class AccountsComponent implements OnInit , OnDestroy {
         // console.log(data)
         this.toastr.success('Addict Added Successfully');
         this.form.resetForm({})
+        this.dialog.closeAll()
       },
       (err)=>{
         // console.log(err)
@@ -190,14 +193,13 @@ export class AccountsComponent implements OnInit , OnDestroy {
   callAddict(){
     let dialogRef = this.dialog.open(this.addictsDialog);
     dialogRef.afterClosed().subscribe(result => {
-        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+
         if (result !== undefined) {
             if (result === 'yes') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked yes.');
+             
+    
             } else if (result === 'no') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked no.');
+             
             }
         }
     })
@@ -205,14 +207,13 @@ export class AccountsComponent implements OnInit , OnDestroy {
   callProfessional(){
     let dialogRef = this.dialog.open(this.professionalDialog);
     dialogRef.afterClosed().subscribe(result => {
-        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+
         if (result !== undefined) {
             if (result === 'yes') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked yes.');
+             
+    
             } else if (result === 'no') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked no.');
+             
             }
         }
     })
@@ -224,14 +225,12 @@ export class AccountsComponent implements OnInit , OnDestroy {
   callAdmin(){
     let dialogRef = this.dialog.open(this.adminDialog);
     dialogRef.afterClosed().subscribe(result => {
-        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+
         if (result !== undefined) {
             if (result === 'yes') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked yes.');
+ 
             } else if (result === 'no') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked no.');
+   
             }
         }
     })
@@ -244,16 +243,14 @@ export class AccountsComponent implements OnInit , OnDestroy {
    this.usrname=currentData.username
     dialogRef.afterClosed().subscribe(result => {
 
-        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
         if (result !== undefined) {
             if (result === 'yes') {
               this.usersService.deleteUser(id).subscribe(
-                // (msg) => console.log(msg),
-                // (error) => console.log(error)
+ 
               );
             } else if (result === 'no') {
-                // TODO: Replace the following line with your code.
-                // console.log('User clicked no.');
+      
+         
             }
         }
     })

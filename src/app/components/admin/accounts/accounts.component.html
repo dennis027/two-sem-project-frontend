@@ -4,50 +4,7 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <mat-card>
-                <button mat-raised-button color="primary" (click)="callAdmin()" style="float: right;" >Add Account</button>
-                <mat-card-title class="text-center">Admins Accounts</mat-card-title>
-                <div class="example-container">
-                    <table mat-table matSort matTableResponsive [dataSource]="admin" >
-            
-                      <ng-container matColumnDef="username">
-                        <th mat-header-cell *matHeaderCellDef> Username. </th>
-                   
-                        <td mat-cell *matCellDef="let element"> {{element.username}}</td>
-                      </ng-container>
-                  
-                     
-                      <ng-container matColumnDef="email">
-                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Email Address </th>
-                      
-                          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                      </ng-container>
-                  
-                    
-                      <ng-container matColumnDef="phone">
-                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Phone Number </th>
-                        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-                      </ng-container>
-                      
-                   
-                  
-                      <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef="let element">
-                          <!-- <button mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                          </button> -->
-                          <button mat-icon-button (click)=" deleteUser(element.id) ">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </td>
-                      </ng-container>
-                  
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                  </div>
-            </mat-card>    
+   
       
             <br><br>
 
@@ -216,7 +173,7 @@
             </mat-card-content>
             
             <div class="text-center">
-              <button mat-raised-button matDialogClose="yes" color="primary" class="btn-block" matInput type="submit">Add Account</button>
+              <button mat-raised-button  color="primary" class="btn-block" matInput type="submit">Add Account</button>
             </div>
             
     
@@ -284,7 +241,7 @@
             </mat-card-content>
             
             <div class="text-center">
-              <button mat-raised-button matDialogClose="yes" color="primary" class="btn-block" matInput type="submit">Add Account</button>
+              <button mat-raised-button  color="primary" class="btn-block" matInput type="submit">Add Account</button>
             </div>
             
     
@@ -351,7 +308,7 @@
       
             </mat-card-content>
             <div class="text-center">
-              <button mat-raised-button matDialogClose="yes" color="primary" class="btn-block" matInput type="submit">Add Account</button>
+              <button mat-raised-button  color="primary" class="btn-block" matInput type="submit">Add Account</button>
             </div>
             
     
