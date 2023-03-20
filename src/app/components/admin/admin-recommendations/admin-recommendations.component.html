@@ -8,13 +8,17 @@
           
                 <br><br>
                 <mat-card>
-                <table mat-table matTableResponsive [dataSource]="unansweredDiag" class="example-container">
+                <table mat-table matTableResponsive [dataSource]="unansweredDiag" class="example-container" matSort>
                   
                     <ng-container matColumnDef="diagnosis_date">
                       <th mat-header-cell *matHeaderCellDef> Date Sending. </th>
                       <td mat-cell *matCellDef="let element"> {{element.diagnosis_date| date :'medium'}} </td>
                     </ng-container>
-                  
+                    <ng-container matColumnDef="drug">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Drug</th>
+                    
+                        <td mat-cell *matCellDef="let element"> {{element.drug}} </td>
+                    </ng-container>
                     <ng-container matColumnDef="diagnosis_subject">
                       <th mat-header-cell *matHeaderCellDef> Message Subject </th>
                       <td mat-cell *matCellDef="let element"> {{element.diagnosis_subject}} </td>
@@ -51,14 +55,18 @@
 
                 
                 <div class="example-container">
-                <table mat-table matSort matTableResponsive [dataSource]="answeredDiag" >
+                <table mat-table matSort matTableResponsive [dataSource]="answeredDiag" matSort >
 
                 <ng-container matColumnDef="diagnosis_date">
                     <th mat-header-cell *matHeaderCellDef> See Professional Date </th>
             
                     <td mat-cell *matCellDef="let element"> {{element.diagnosis_date | date :'medium'}}</td>
                 </ng-container>
-            
+                <ng-container matColumnDef="drug">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Drug</th>
+                
+                    <td mat-cell *matCellDef="let element"> {{element.drug}} </td>
+                </ng-container>
                 
                 <ng-container matColumnDef="diagnosis_subject">
                     <th mat-header-cell mat-sort-header *matHeaderCellDef> Message Subject</th>

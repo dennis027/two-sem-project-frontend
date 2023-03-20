@@ -15,12 +15,14 @@ export interface seenObject {
   recommendation_date:string;
   recommendation_subject:string;
   recommendation_message:string;
+  drug:string
 }
 
 export interface unseenClass {
   diagnosis_date: string;
   diagnosis_subject: string;
   diagnosis_message: string;
+  drug:string
 }
 
 declare function mergediag(questions:any,answers:any):any
@@ -48,6 +50,7 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
   dialogRef!: MatDialogRef<TemplateRef<'openDialogDia'>>;
   data:any={
     user:null,
+    drug:null,
     diagnosis_subject:null,
     diagnosis_message:null,
   }
@@ -61,11 +64,11 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
 
      ) { }
      answeredDiag : seenObject[] = [ ];
-     displayedSeen: string[] = ['diagnosis_date', 'diagnosis_subject', 'diagnosis_message', 'recommendation_date', 'recommendation_subject','recommendation_message'];
+     displayedSeen: string[] = ['diagnosis_date', 'drug','diagnosis_subject', 'diagnosis_message', 'recommendation_date', 'recommendation_subject','recommendation_message'];
      dataSource = new MatTableDataSource([...this.answeredDiag ]);
 
       unansweredDiag: unseenClass[] = [ ];
-     displayedColumns: string[] = ['diagnosis_date','diagnosis_subject', 'diagnosis_message'];
+     displayedColumns: string[] = ['diagnosis_date','drug','diagnosis_subject', 'diagnosis_message'];
      dataSource1 = new MatTableDataSource([...this.unansweredDiag ]);
       ngOnInit(): void {
 
@@ -115,8 +118,8 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
   }
   onSubmit(): void{
     // this.loader=true
-    let {user,diagnosis_subject,diagnosis_message}= this.data;
-    this.diagnosisService.postDiagnois(user =this.user_id,diagnosis_subject,diagnosis_message,).subscribe(
+    let {user,drug,diagnosis_subject,diagnosis_message}= this.data;
+    this.diagnosisService.postDiagnois(user =this.user_id,drug,diagnosis_subject,diagnosis_message,).subscribe(
       (data) => {
     
         // this.loader=false
@@ -143,8 +146,8 @@ export class DiagnosisComponent implements OnInit , OnDestroy {
         // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
         if (result !== undefined) {
             if (result === 'yes') {
-              let {user,diagnosis_subject,diagnosis_message}= this.data;
-              this.diagnosisService.postDiagnois(user =this.user_id,diagnosis_subject,diagnosis_message,).subscribe(
+              let {user,drug,diagnosis_subject,diagnosis_message}= this.data;
+              this.diagnosisService.postDiagnois(user =this.user_id,drug,diagnosis_subject,diagnosis_message,).subscribe(
                 (data) => {
               
                   // this.loader=false

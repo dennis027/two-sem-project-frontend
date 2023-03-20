@@ -17,10 +17,10 @@ export class DiagnosisService {
   getDiagnosis(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.diagnosisAPI);
   }
-  postDiagnois(user:string,diagnosis_subject:string,diagnosis_message:string): Observable<any>{
+  postDiagnois(user:string,drug:string,diagnosis_subject:string,diagnosis_message:string): Observable<any>{
     return this.http.post(this.diagnosisAPI,{
       
-      user,diagnosis_subject,diagnosis_message,
+      user,drug,diagnosis_subject,diagnosis_message,
     },httpOptions)
   }
 

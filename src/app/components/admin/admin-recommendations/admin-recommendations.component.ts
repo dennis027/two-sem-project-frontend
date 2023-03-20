@@ -15,12 +15,14 @@ export interface seenObject {
   recommendation_date:string;
   recommendation_subject:string;
   recommendation_message:string;
+  drug:any
 }
 
 export interface unseenClass {
   diagnosis_date: string;
   diagnosis_subject: string;
   diagnosis_message: string;
+  drug:any
 }
 
 declare function mergediag(questions:any,answers:any):any
@@ -64,11 +66,11 @@ export class AdminRecommendationsComponent implements OnInit {
 
      ) { }
      answeredDiag : seenObject[] = [ ];
-     displayedSeen: string[] = ['diagnosis_date', 'diagnosis_subject', 'diagnosis_message', 'recommendation_date', 'recommendation_subject','recommendation_message'];
+     displayedSeen: string[] = ['diagnosis_date', 'drug', 'diagnosis_subject', 'diagnosis_message', 'recommendation_date', 'recommendation_subject','recommendation_message'];
      dataSource = new MatTableDataSource([...this.answeredDiag ]);
 
       unansweredDiag: unseenClass[] = [ ];
-     displayedColumns: string[] = ['diagnosis_date','diagnosis_subject', 'diagnosis_message','actions'];
+     displayedColumns: string[] = ['diagnosis_date', 'drug','diagnosis_subject', 'diagnosis_message','actions'];
      dataSource1 = new MatTableDataSource([...this.unansweredDiag ]);
   ngOnInit(): void {
     this.subscription = this.everyFiveSeconds.subscribe(() => {
