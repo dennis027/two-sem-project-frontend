@@ -38,7 +38,7 @@ export class AccountsComponent implements OnInit , OnDestroy {
   @ViewChild('professionalDialog') professionalDialog!: TemplateRef<any>;
   @ViewChild('addictsDialog') addictsDialog!: TemplateRef<any>;
   @ViewChild('deleteAccountDialog') deleteAccountDialog!: TemplateRef<any>;
-
+  @ViewChild('sendAllEmailDialog') sendAllEmailDialog!: TemplateRef<any>;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
   public isCaps: boolean = false;
@@ -54,7 +54,7 @@ export class AccountsComponent implements OnInit , OnDestroy {
     role:null,
     password:null
   }
-
+  allEmails:any
   userProf:any={
     username:null,
     email:null,
@@ -309,7 +309,32 @@ sendMail(){
     }
   )
 }
-
+sendAllMail(){
+  this.loader=true
+  const data ={
+    subject:this.send_mail.subject,
+    message:this.send_mail.message,
+    from_email:this.send_mail.from_email,
+    recipient_list:this.allEmails
+  }
+  this.emailService.sendEmailContacts(data).subscribe(
+    (res)=>{
+      this.loader=false
+      this.success=res
+      this.toastr.success(this.success.message)
+      this.send_mail.subject='',
+      this.send_mail.message=''
+      this.dialog.closeAll()
+    },
+    (err)=>{
+      this.loader=false
+      this.failed=err
+      this.toastr.error(this.failed.error.message)
+   
+      
+    }
+  )
+}
 openSendMail() {
   let dialogRef = this.dialog.open(this.sendEmailDialog);
   dialogRef.afterClosed().subscribe(result => {
@@ -326,7 +351,27 @@ openSendMail() {
   })
 }
 
-ngOnDestroy() {
-  this.subscription.unsubscribe();
+
+openAllSendMail() {
+  this.allEmails = this.users.map((user: { email: any; }) => user.email);
+  console.log(this.allEmails);
+  let dialogRef = this.dialog.open(this.sendAllEmailDialog);
+  dialogRef.afterClosed().subscribe(result => {
+    
+      if (result !== undefined) {
+          if (result === 'yes') {
+        
+         
+          } else if (result === 'no') {
+        
+           
+          }
+      }
+  })
+}
+ngOnDestroy(): void {
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
 }
 }

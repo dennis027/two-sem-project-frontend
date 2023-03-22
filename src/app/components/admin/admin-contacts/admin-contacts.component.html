@@ -8,9 +8,11 @@
             <mat-card-title>
               <h1 class="text-center"> Contact Information </h1>
             </mat-card-title>
+            <button mat-raised-button color="primary" style="float: right;" (click)="openAllSendMail()" type="button">Send All Mail</button>
             <div class="example-container">
+             
               <table mat-table matSort matTableResponsive [dataSource]="contact" >
-      
+               
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef> Name </th>
              
@@ -115,7 +117,52 @@
             
           </div>
       </div>
-          <button *ngIf="!loader" mat-raised-button color="primary" matInput type="submit">Send Email</button>
+          <button *ngIf="!loader"  mat-raised-button color="primary" matInput type="submit" >Send Email</button>
+          <button *ngIf="loader" mat-stroked-button color="primary" matInput type="submit">Sending Email ...</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+
+      <button mat-button matDialogClose="yes">Cancel</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #sendAllEmailDialog>
+  <h2 matDialogTitle>Send Email to All Contacts</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <form #formRoles="ngForm"  name="formrol" (ngSubmit)="formRoles.form.valid && sendAllMail();">
+          <div class="row">
+            <div class="col-md-3">
+              <p style="display: inline;">Email Subject: </p>
+            </div>
+            <div class="col-md-9">
+              <mat-form-field appearance="outline" >
+                <mat-label>Email Subject</mat-label>
+                <input matInput placeholder="Email Subject" name="subject" [(ngModel)]="send_mail.subject" #subject ="ngModel" maxlength="30">
+      
+              </mat-form-field>
+              
+            </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <p style="display: inline;">Email Message: </p>
+          </div>
+          <div class="col-md-9">
+            <mat-form-field appearance="outline" >
+              <mat-label>Email Message</mat-label>
+              <textarea matInput placeholder="Email Message" name="message" [(ngModel)]="send_mail.message" #message ="ngModel" maxlength="200"></textarea>
+      
+            </mat-form-field>
+            
+          </div>
+      </div>
+          <button *ngIf="!loader"  mat-raised-button color="primary" matInput type="submit" >Send Email</button>
           <button *ngIf="loader" mat-stroked-button color="primary" matInput type="submit">Sending Email ...</button>
         </form>
       </div>

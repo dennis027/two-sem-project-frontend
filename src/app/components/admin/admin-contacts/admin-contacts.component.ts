@@ -28,6 +28,7 @@ export interface PeriodicElement {
 export class AdminContactsComponent implements OnInit {
   @ViewChild('sendEmailDialog') sendEmailDialog!: TemplateRef<any>;
   @ViewChild('formRoles') formrol!:NgForm
+  @ViewChild('sendAllEmailDialog') sendAllEmailDialog!: TemplateRef<any>;
   loader:boolean=false
   userMail:any
   send_mail:any = {
@@ -37,7 +38,7 @@ export class AdminContactsComponent implements OnInit {
     recipient_list:[]
   }
   currentEmail:any
-
+  allEmails:any
   success:any
   failed:any
   @ViewChild('deleteDialog') deleteDialog!: TemplateRef<any>;
@@ -142,7 +143,49 @@ openSendMail() {
       }
   })
 }
-
+openAllSendMail() {
+  this.allEmails = this.contact.map(user=> user.email);
+  console.log(this.allEmails);
+  let dialogRef = this.dialog.open(this.sendAllEmailDialog);
+  dialogRef.afterClosed().subscribe(result => {
+    
+      if (result !== undefined) {
+          if (result === 'yes') {
+        
+         
+          } else if (result === 'no') {
+        
+           
+          }
+      }
+  })
+}
+sendAllMail(){
+  this.loader=true
+  const data ={
+    subject:this.send_mail.subject,
+    message:this.send_mail.message,
+    from_email:this.send_mail.from_email,
+    recipient_list:this.allEmails
+  }
+  this.emailService.sendEmailContacts(data).subscribe(
+    (res)=>{
+      this.loader=false
+      this.success=res
+      this.toastr.success(this.success.message)
+      this.send_mail.subject='',
+      this.send_mail.message=''
+      this.dialog.closeAll()
+    },
+    (err)=>{
+      this.loader=false
+      this.failed=err
+      this.toastr.error(this.failed.error.message)
+   
+      
+    }
+  )
+}
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
