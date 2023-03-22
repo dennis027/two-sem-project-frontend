@@ -39,6 +39,8 @@ export class AccountsComponent implements OnInit , OnDestroy {
   @ViewChild('addictsDialog') addictsDialog!: TemplateRef<any>;
   @ViewChild('deleteAccountDialog') deleteAccountDialog!: TemplateRef<any>;
   @ViewChild('sendAllEmailDialog') sendAllEmailDialog!: TemplateRef<any>;
+  @ViewChild('sendAllAddictEmailDialog') sendAllAddictEmailDialog!: TemplateRef<any>;
+  @ViewChild('sendAllProfEmailDialog') sendAllProfEmailDialog!: TemplateRef<any>;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
   public isCaps: boolean = false;
@@ -81,7 +83,8 @@ export class AccountsComponent implements OnInit , OnDestroy {
   currentEmail:any
   success:any
   failed:any
-
+  addictsEmails:any
+  profEmails:any
   @ViewChild('f') form!:NgForm
   users:any
   usrname:any
@@ -335,6 +338,58 @@ sendAllMail(){
     }
   )
 }
+sendAllAddictMail(){
+  this.loader=true
+  const data ={
+    subject:this.send_mail.subject,
+    message:this.send_mail.message,
+    from_email:this.send_mail.from_email,
+    recipient_list:this.addictsEmails
+  }
+  this.emailService.sendEmailContacts(data).subscribe(
+    (res)=>{
+      this.loader=false
+      this.success=res
+      this.toastr.success(this.success.message)
+      this.send_mail.subject='',
+      this.send_mail.message=''
+      this.dialog.closeAll()
+    },
+    (err)=>{
+      this.loader=false
+      this.failed=err
+      this.toastr.error(this.failed.error.message)
+   
+      
+    }
+  )
+}
+sendAllProfMail(){
+  this.loader=true
+  const data ={
+    subject:this.send_mail.subject,
+    message:this.send_mail.message,
+    from_email:this.send_mail.from_email,
+    recipient_list:this.profEmails
+  }
+  this.emailService.sendEmailContacts(data).subscribe(
+    (res)=>{
+      this.loader=false
+      this.success=res
+      this.toastr.success(this.success.message)
+      this.send_mail.subject='',
+      this.send_mail.message=''
+      this.dialog.closeAll()
+    },
+    (err)=>{
+      this.loader=false
+      this.failed=err
+      this.toastr.error(this.failed.error.message)
+   
+      
+    }
+  )
+}
 openSendMail() {
   let dialogRef = this.dialog.open(this.sendEmailDialog);
   dialogRef.afterClosed().subscribe(result => {
@@ -356,6 +411,42 @@ openAllSendMail() {
   this.allEmails = this.users.map((user: { email: any; }) => user.email);
   console.log(this.allEmails);
   let dialogRef = this.dialog.open(this.sendAllEmailDialog);
+  dialogRef.afterClosed().subscribe(result => {
+    
+      if (result !== undefined) {
+          if (result === 'yes') {
+        
+         
+          } else if (result === 'no') {
+        
+           
+          }
+      }
+  })
+}
+
+openAllAdSendMail(){
+  this.addictsEmails = this.addicts.map((user: { email: any; }) => user.email);
+  console.log(this.addictsEmails);
+  let dialogRef = this.dialog.open(this.sendAllAddictEmailDialog);
+  dialogRef.afterClosed().subscribe(result => {
+    
+      if (result !== undefined) {
+          if (result === 'yes') {
+        
+         
+          } else if (result === 'no') {
+        
+           
+          }
+      }
+  })
+}
+
+openAllprofSendMail() {
+  this.profEmails = this.professional.map((user: { email: any; }) => user.email);
+  console.log(this.profEmails);
+  let dialogRef = this.dialog.open(this.sendAllProfEmailDialog);
   dialogRef.afterClosed().subscribe(result => {
     
       if (result !== undefined) {
