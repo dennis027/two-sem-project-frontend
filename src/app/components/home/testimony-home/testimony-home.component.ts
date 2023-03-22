@@ -42,7 +42,7 @@ export class TestimonyHomeComponent implements OnInit {
     private dialog: MatDialog,
   ) { }
   approvedTestimonies : seenObject[] = [ ];
-  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location', 'approve_date'];
+  displayedApproved: string[] = ['testimony_date', 'testimony_subject', 'testimony_message', 'testimony_location'];
   dataSource3 = new MatTableDataSource([...this.approvedTestimonies ]);
   ngOnInit(): void {
 

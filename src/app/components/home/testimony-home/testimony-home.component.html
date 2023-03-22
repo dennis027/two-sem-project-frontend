@@ -1,5 +1,8 @@
-<div class="container-fluid">
+<app-navbar></app-navbar>
+<br><br>
+<div class="container-fluid" style="min-height: 65vh;">
     <div class="row">
+
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <mat-card>
@@ -48,6 +51,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedApproved; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedApproved;"></tr>
                 </table>
+                
                </div>
             </mat-card>
             </mat-card>
@@ -55,3 +59,7 @@
         <div class="col-md-2"></div>
     </div>
 </div>        
+
+<app-footer>
+
+</app-footer>

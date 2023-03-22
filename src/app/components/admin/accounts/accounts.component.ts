@@ -9,7 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { Observable, Subscription, timer } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
+import { SendMailService } from 'src/app/services/send-mail.service';
 export interface usersObject {
   username:string;
   email:string;
@@ -32,6 +33,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class AccountsComponent implements OnInit , OnDestroy {
   subscription!: Subscription;
   everyFiveSeconds: Observable<number> = timer(0, 5000);
+  @ViewChild('sendEmailDialog') sendEmailDialog!: TemplateRef<any>;
   @ViewChild('adminDialog') adminDialog!: TemplateRef<any>;
   @ViewChild('professionalDialog') professionalDialog!: TemplateRef<any>;
   @ViewChild('addictsDialog') addictsDialog!: TemplateRef<any>;
@@ -60,6 +62,12 @@ export class AccountsComponent implements OnInit , OnDestroy {
     role:null,
     password:null
   }
+    send_mail:any = {
+    subject:'',
+    message:'',
+    from_email:environment.emailAddress,
+    recipient_list:[]
+  }
   userAdd:any={
     username:null,
     email:null,
@@ -67,6 +75,13 @@ export class AccountsComponent implements OnInit , OnDestroy {
     role:null,
     password:null
   }
+  loader:boolean=false
+  thisEmail:any
+  userMail:any
+  currentEmail:any
+  success:any
+  failed:any
+
   @ViewChild('f') form!:NgForm
   users:any
   usrname:any
@@ -78,7 +93,8 @@ export class AccountsComponent implements OnInit , OnDestroy {
   constructor(
     private usersService:UsersService
     ,private toastr: ToastrService,
-    private dialog: MatDialog,) { }
+    private dialog: MatDialog,
+    private emailService:SendMailService) { }
 
 
  addicts: usersObject[] = [    ];
@@ -254,6 +270,60 @@ export class AccountsComponent implements OnInit , OnDestroy {
             }
         }
     })
+}
+getEmail(id:any){
+  console.log(id)
+  let currentRole =  this.users.find((p: { id: any; }) =>{return p.id ===  id});
+  console.log(currentRole)
+  console.log(typeof(currentRole?.email))
+  this.thisEmail= currentRole?.email
+  this.userMail=currentRole?.name
+  this.currentEmail = new Array(); 
+  length = this.currentEmail.push(this.thisEmail); 
+  console.log("new email is : " + this.currentEmail );
+
+}
+sendMail(){
+  this.loader=true
+  const data ={
+    subject:this.send_mail.subject,
+    message:this.send_mail.message,
+    from_email:this.send_mail.from_email,
+    recipient_list:this.currentEmail
+  }
+  this.emailService.sendEmailContacts(data).subscribe(
+    (res)=>{
+      this.loader=false
+      this.success=res
+      this.toastr.success(this.success.message)
+      this.send_mail.subject='',
+      this.send_mail.message=''
+      this.dialog.closeAll()
+    },
+    (err)=>{
+      this.loader=false
+      this.failed=err
+      this.toastr.error(this.failed.error.message)
+   
+      
+    }
+  )
+}
+
+openSendMail() {
+  let dialogRef = this.dialog.open(this.sendEmailDialog);
+  dialogRef.afterClosed().subscribe(result => {
+      // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+      if (result !== undefined) {
+          if (result === 'yes') {
+        
+         
+          } else if (result === 'no') {
+        
+           
+          }
+      }
+  })
 }
 
 ngOnDestroy() {

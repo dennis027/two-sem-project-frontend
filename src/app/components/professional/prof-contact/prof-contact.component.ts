@@ -7,14 +7,15 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-
+import { environment } from 'src/environments/environment';
+import { SendMailService } from 'src/app/services/send-mail.service';
 export interface PeriodicElement {
   name:string;
   email:string;
   subject:string;
   message:string;
   date:string;
-
+  id:any
 }
 
 
@@ -24,7 +25,7 @@ export interface PeriodicElement {
   styleUrls: ['./prof-contact.component.css']
 })
 export class ProfContactComponent implements OnInit , OnDestroy {
-
+  @ViewChild('sendEmailDialog') sendEmailDialog!: TemplateRef<any>;
   @ViewChild('deleteDialog') deleteDialog!: TemplateRef<any>;
   contact: PeriodicElement[] = [
 
@@ -39,9 +40,22 @@ export class ProfContactComponent implements OnInit , OnDestroy {
   
   // contact:any
   constructor(    private contactService:ContactService,
-    private toastr: ToastrService,
-    private dialog: MatDialog,) { }
+                  private toastr: ToastrService,
+                  private dialog: MatDialog,
+                  private emailService:SendMailService) { }
 
+    loader:boolean=false
+    thisEmail:any
+    userMail:any
+    currentEmail:any
+    success:any
+    failed:any
+    send_mail:any = {
+      subject:'',
+      message:'',
+      from_email:environment.emailAddress,
+      recipient_list:[]
+    }
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
     this.subscription = this.everyFiveSeconds.subscribe(() => {
@@ -70,6 +84,61 @@ export class ProfContactComponent implements OnInit , OnDestroy {
             }
         }
     })
+}
+
+getEmail(id:any){
+  console.log(id)
+  let currentRole = this.contact.find((p) =>{return p.id ===  id});
+  console.log(currentRole)
+  console.log(typeof(currentRole?.email))
+  this.thisEmail= currentRole?.email
+  this.userMail=currentRole?.name
+  this.currentEmail = new Array(); 
+  length = this.currentEmail.push(this.thisEmail); 
+  console.log("new email is : " + this.currentEmail );
+
+}
+sendMail(){
+  this.loader=true
+  const data ={
+    subject:this.send_mail.subject,
+    message:this.send_mail.message,
+    from_email:this.send_mail.from_email,
+    recipient_list:this.currentEmail
+  }
+  this.emailService.sendEmailContacts(data).subscribe(
+    (res)=>{
+      this.loader=false
+      this.success=res
+      this.toastr.success(this.success.message)
+      this.send_mail.subject='',
+      this.send_mail.message=''
+      this.dialog.closeAll()
+    },
+    (err)=>{
+      this.loader=false
+      this.failed=err
+      this.toastr.error(this.failed.error.message)
+   
+      
+    }
+  )
+}
+
+openSendMail() {
+  let dialogRef = this.dialog.open(this.sendEmailDialog);
+  dialogRef.afterClosed().subscribe(result => {
+      // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+      if (result !== undefined) {
+          if (result === 'yes') {
+        
+         
+          } else if (result === 'no') {
+        
+           
+          }
+      }
+  })
 }
 
   ngOnDestroy() {

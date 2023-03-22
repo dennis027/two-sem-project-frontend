@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AboutUsComponent } from './components/home/about-us/about-us.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LandingComponent } from './components/landing/landing.component';
-import { LoginComponent } from './components/login/login.component';
+import { LandingComponent } from './components/home/landing/landing.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ContactComponent } from './components/contact/contact.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { ContactComponent } from './components/home/contact/contact.component';
 import { LoggedNavbarComponent } from './components/logged-navbar/logged-navbar.component';
 import { HomeComponent } from './components/patient/home/home.component';
 import { DiagnosisComponent } from './components/patient/diagnosis/diagnosis.component';
@@ -26,9 +26,9 @@ import { ProfHomeComponent } from './components/professional/prof-home/prof-home
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminContactsComponent } from './components/admin/admin-contacts/admin-contacts.component';
 import { ProfContactComponent } from './components/professional/prof-contact/prof-contact.component';
-import { TestimonyHomeComponent } from './components/testimony-home/testimony-home.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
-import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { TestimonyHomeComponent } from './components/home/testimony-home/testimony-home.component';
+import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
+import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
 import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
