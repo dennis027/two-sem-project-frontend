@@ -10,6 +10,7 @@ import { DiagnosisService } from 'src/app/services/diagnosis.service';
 import { QuestionsService } from 'src/app/services/questions.service';
 import { RecommendationsService } from 'src/app/services/recommendations.service';
 import { TestimoniesService } from 'src/app/services/testimonies.service';
+import { UsersService } from 'src/app/services/users.service';
 declare function mergeById(questions:any,answers:any):any
 declare function mergediag(diagnosis:any,recommendation:any):any
 declare function mergeByTesti(diagnosis:any,recommendation:any):any
@@ -64,6 +65,7 @@ export class PatientComponent implements OnInit {
     private testimonyService:TestimoniesService,
     private contactService:ContactService,
     private router: Router,
+    private usersService:UsersService,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,  ) {
     this.mobileQuery = media.matchMedia('(max-width: 896px)',);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -73,7 +75,11 @@ export class PatientComponent implements OnInit {
   }
 
   // constructor(private router: Router) { }
- 
+ numberQuiz:any
+ numberAnswered:any
+ diagDone:any
+ users:any
+ usersLength:any
   ngOnInit(): void {
 
     this.username = localStorage.getItem('username')
@@ -93,26 +99,34 @@ export class PatientComponent implements OnInit {
         // console.log(this.mergeQA)
 
         this.uniqueQA = this.mergeQA.filter((id:any) => id.user == this.user_id)
+        this.numberQuiz = this.uniqueQA.length
         // console.log(this.uniqueQA)
        
         this.uniqueAnswerd = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date !== undefined) //filter for answered QUESTIONS
         // console.log(this.uniqueAnswerd)
+        this.numberAnswered = this.uniqueAnswerd.length
 
 
         this.uniqueUnanswed = this.uniqueQA.filter((uniqueQA:any) => uniqueQA.answer_date === undefined) //filter for UNanswered QUESTIONS
-        // console.log(this.uniqueUnanswed)
+        console.log((this.uniqueUnanswed).length)
 
         }
       
   
     })
 
+    this.usersService.getUsers().subscribe((res:any)=>{
+      this.users=res
+      this.usersLength = this.users.length
+     })
+  
 
     this.diagnosisService.getDiagnosis().subscribe((res:any[])=>{
       this.diagnosis=res
       // console.log(this.diagnosis)    
       this.uniqueDiagnosis = this.diagnosis.filter((id:any) => id.user == this.user_id)
       // console.log(this.uniqueDiagnosis)
+      this.diagDone = this.uniqueDiagnosis.length
       })
 
     

@@ -280,10 +280,10 @@ getEmail(id:any){
   console.log(currentRole)
   console.log(typeof(currentRole?.email))
   this.thisEmail= currentRole?.email
-  this.userMail=currentRole?.name
+  this.userMail=currentRole?.username
   this.currentEmail = new Array(); 
   length = this.currentEmail.push(this.thisEmail); 
-  console.log("new email is : " + this.currentEmail );
+
 
 }
 sendMail(){
@@ -393,7 +393,7 @@ sendAllProfMail(){
 openSendMail() {
   let dialogRef = this.dialog.open(this.sendEmailDialog);
   dialogRef.afterClosed().subscribe(result => {
-      // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+ 
       if (result !== undefined) {
           if (result === 'yes') {
         
