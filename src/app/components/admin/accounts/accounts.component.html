@@ -11,10 +11,10 @@
        
      
         
-          <button mat-raised-button color="primary" style="float: right;" (click)="openAllSendMail()" type="button">Send All Mail</button> <br><br>
+          <button mat-raised-button color="primary" style="float: right;" (click)="openAllSendMail()" type="button"><mat-icon>mail</mat-icon> All Accounts</button> <br><br>
             <mat-card>
               <button mat-raised-button color="primary" (click)="callProfessional()" style="float: right;" >Add Account</button>
-              <button mat-raised-button color="primary" style="float: right;" (click)="openAllprofSendMail()" type="button">Send All Mail</button> 
+              <button mat-raised-button color="primary" style="float: right;" (click)="openAllprofSendMail()" type="button"><mat-icon>mail</mat-icon> All Professionals</button> 
              
                 <mat-card-title class="text-center">Professional Accounts</mat-card-title>
                 <div class="example-container">
@@ -63,7 +63,7 @@
 
             <mat-card>
                 <button mat-raised-button color="primary" (click)="callAddict()" style="float: right;" >Add Account</button>
-                <button mat-raised-button color="primary" style="float: right;" (click)="openAllAdSendMail()" type="button">Send All Mail</button> 
+                <button mat-raised-button color="primary" style="float: right;" (click)="openAllAdSendMail()" type="button"><mat-icon>mail</mat-icon> All Addicts</button> 
                 <mat-card-title class="text-center">Addicts Accounts</mat-card-title>
                 <div class="example-container">
                     <table mat-table matSort matTableResponsive [dataSource]="addicts" >

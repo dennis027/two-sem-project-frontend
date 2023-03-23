@@ -74,7 +74,7 @@ export class AdminAnswersComponent implements OnInit , OnDestroy {
      private dialog: MatDialog,
   ) { }
   uniqueAnswerd : seenObject[] = [ ];
-  displayedSeen: string[] = ['question_date', 'question_subject', 'question_message', 'answer_date', 'answer_subject','answer_message','actions'];
+  displayedSeen: string[] = ['question_date', 'question_subject', 'question_message', 'answer_date', 'answer_subject','answer_message'];
   dataSource = new MatTableDataSource([...this.uniqueAnswerd ]);
 
    uniqueUnanswed: unseenClass[] = [ ];

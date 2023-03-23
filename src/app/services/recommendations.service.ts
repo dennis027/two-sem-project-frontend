@@ -19,4 +19,7 @@ export class RecommendationsService {
   postRecommendation(reccom:any):Observable<any>{
     return this.http.post(this.reomendationAPI,reccom,httpOptions)
   }
+  updateReccom(ide:any,recom:any){
+    return this.http.put(this.reomendationAPI + ide +'/', recom).subscribe();
+  }
 }

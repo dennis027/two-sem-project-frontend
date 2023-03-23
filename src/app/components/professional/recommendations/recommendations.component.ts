@@ -45,13 +45,24 @@ export class RecommendationsComponent implements OnInit , OnDestroy {
   my_id:any
   success:any
   failed:any
+  ide:any
+  dat:any
+  ident:any;
+  qid:any
   // answeredDiag:any
   // unansweredDiag:any
 
   @ViewChild('f') form!:NgForm
   @ViewChild('openDialogDia') openDialogDia!: TemplateRef<any>;
-
+  @ViewChild('updatAnswers') uptFunction!:NgForm //declare assign fun form
+  @ViewChild('openUpdateDialog') openUpdateDialog!: TemplateRef<any>;
   reccom:any={
+    diagnosis_id:null,
+    user:null,
+    recommendation_subject:null,
+    recommendation_message:null,
+  }
+  updated_reccom:any={
     diagnosis_id:null,
     user:null,
     recommendation_subject:null,
@@ -65,7 +76,7 @@ export class RecommendationsComponent implements OnInit , OnDestroy {
 
      ) { }
      answeredDiag : seenObject[] = [ ];
-     displayedSeen: string[] = ['diagnosis_date', 'drug','diagnosis_subject', 'diagnosis_message', 'recommendation_date', 'recommendation_subject','recommendation_message'];
+     displayedSeen: string[] = ['diagnosis_date', 'drug','diagnosis_subject', 'diagnosis_message', 'recommendation_date', 'recommendation_subject','recommendation_message','actions'];
      dataSource = new MatTableDataSource([...this.answeredDiag ]);
 
       unansweredDiag: unseenClass[] = [ ];
@@ -185,4 +196,53 @@ ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }
+
+updateAnswers(id:any){
+  let currentData = this.resed.find((p: { id: any; }) =>{return p.id ===  id});
+  console.log(currentData)
+  this.ide=currentData.id
+  this.dat=currentData.answer_date
+  this.qid = currentData.diagnosis_id
+  this.uptFunction.setValue({
+    // question_id:currentData.question_id,
+    // user:this.user_id,
+    recommendation_subject:currentData.recommendation_subject,
+    recommendation_message:currentData.recommendation_message,
+  })
+
+}
+
+
+onUpdate(){
+  const updatedAnswer = {
+    diagnosis_id:this.qid,
+    user:this.user_id,
+    recommendation_subject:this.updated_reccom.recommendation_subject,
+    recommendation_message:this.updated_reccom.recommendation_message,
+  
+  }
+this.recommendationService.updateReccom(this.ide,updatedAnswer)
+this.uptFunction.resetForm()
+this.dialog.closeAll()
+  
+
+}
+
+updateAnswerDialog() {
+  
+  let dialogRef = this.dialog.open(this.openUpdateDialog);
+  dialogRef.afterClosed().subscribe(result => {
+    
+      if (result !== undefined) {
+          if (result === 'yes') {
+  
+              // console.log('User clicked yes.');
+          } else if (result === 'no') {
+
+              // console.log('User clicked no.');
+          }
+      }
+  })
+}
+
 }
