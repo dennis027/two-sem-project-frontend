@@ -235,7 +235,9 @@ export class ApprovalComponent implements OnInit , OnDestroy {
         }
     })
 }
-ngOnDestroy() {
-  this.subscription.unsubscribe();
+ngOnDestroy(): void {
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
 }
 }

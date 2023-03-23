@@ -185,7 +185,9 @@ export class AdminAnswersComponent implements OnInit , OnDestroy {
   this.answersService.updateAnswers(this.ide,updatedAnswer)
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

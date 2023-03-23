@@ -181,7 +181,9 @@ getId(id:any){
 }
 
 
-ngOnDestroy() {
-  this.subscription.unsubscribe();
+ngOnDestroy(): void {
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
 }
 }

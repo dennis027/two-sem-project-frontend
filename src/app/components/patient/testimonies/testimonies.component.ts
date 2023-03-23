@@ -172,7 +172,9 @@ export class TestimoniesComponent implements OnInit , OnDestroy {
       // );
       // this.dialogRef.close();
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

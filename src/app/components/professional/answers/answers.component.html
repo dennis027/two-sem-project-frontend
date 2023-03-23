@@ -103,12 +103,10 @@
               <ng-container matColumnDef="actions">
                   <th mat-header-cell *matHeaderCellDef></th>
                   <td mat-cell *matCellDef="let element">
-                  <button mat-icon-button (click)="updateAnswers(element.id)">
+                  <button mat-icon-button (click)="updateAnswerDialog();updateAnswers(element.id)">
                       <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button>
-                      <mat-icon>delete</mat-icon>
-                  </button>
+                 
                   </td>
               </ng-container>
           
@@ -121,4 +119,45 @@
       </div>
       <div class="col-md-2"></div>
   </div>
+</div>
+
+
+
+<ng-template #openUpdateDialog>
+  <h3 matDialogTitle>Answer Question!</h3>
+  <form class="example-form" (ngSubmit)=" onUpdate()" name="uptFunction" #updatAnswers="ngForm" class="text-center">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Subject</mat-label>
+      <input matInput placeholder="Your Subject" name="answer_subject" [(ngModel)]="updateAnswer.answer_subject" #answer_subject="ngModel" matInput type="text" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Message</mat-label>
+      <textarea style="height: 70px;" matInput placeholder="Your Message" name="answer_message" [(ngModel)]="updateAnswer.answer_message" #answer_message="ngModel" matInput type="text" required></textarea>
+      </mat-form-field>
+   <br>
+  
+   <button type="submit" mat-button >Submit</button>
+   </form>
+  <mat-dialog-actions align="end">
+     
+   
+  </mat-dialog-actions>
+</ng-template>
+
+<div class="hid">
+  <form class="example-form" (ngSubmit)=" onUpdate()" name="uptFunction" #updatAnswers="ngForm" class="text-center">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Subject</mat-label>
+      <input matInput placeholder="Your Subject" name="answer_subject" [(ngModel)]="updateAnswer.answer_subject" #answer_subject="ngModel" matInput type="text" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Message</mat-label>
+      <textarea style="height: 70px;" matInput placeholder="Your Message" name="answer_message" [(ngModel)]="updateAnswer.answer_message" #answer_message="ngModel" matInput type="text" required></textarea>
+      </mat-form-field>
+   <br>
+  
+   <button type="submit" mat-button >Submit</button>
+   </form>
 </div>

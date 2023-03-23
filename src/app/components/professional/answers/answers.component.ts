@@ -1,10 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild,OnDestroy } from '@angular/core';
 import { AnswersService } from 'src/app/services/answers.service';
 import { QuestionsService } from 'src/app/services/questions.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, timer,Subscription } from 'rxjs';
 declare function mergeById(questions:any,answers:any):any
 
 export interface seenObject {
@@ -26,10 +27,13 @@ export interface unseenClass {
   templateUrl: './answers.component.html',
   styleUrls: ['./answers.component.css']
 })
-export class AnswersComponent implements OnInit {
+export class AnswersComponent implements OnInit , OnDestroy {
+  subscription!: Subscription;
+  everyFiveSeconds: Observable<number> = timer(0, 5000);
   @ViewChild('openDialogQues') openDialogQues!: TemplateRef<any>;
   @ViewChild('openAnswerDialog') openAnswerDialog!: TemplateRef<any>;
   @ViewChild('updatAnswers') uptFunction!:NgForm //declare assign fun form
+  @ViewChild('openUpdateDialog') openUpdateDialog!: TemplateRef<any>;
   questions: any;
   answers: any;
   mergeQA: any;
@@ -78,6 +82,11 @@ export class AnswersComponent implements OnInit {
   displayedColumns: string[] = ['question_date','question_subject', 'question_message','actions'];
   dataSource1 = new MatTableDataSource([...this.uniqueUnanswed ]);
   ngOnInit(): void {
+
+    this.subscription = this.everyFiveSeconds.subscribe(() => {
+
+   
+  
   
     this.username = localStorage.getItem('username')
     this.user_id = localStorage.getItem('user_id')
@@ -109,6 +118,8 @@ export class AnswersComponent implements OnInit {
       
   
     })
+
+  });
   }
 
   onGetId(id:any){
@@ -177,5 +188,33 @@ export class AnswersComponent implements OnInit {
       answer_date:this.dat
     }
   this.answersService.updateAnswers(this.ide,updatedAnswer)
+  this.uptFunction.resetForm()
+  this.dialog.closeAll()
+    
+
   }
+
+  updateAnswerDialog() {
+    
+    let dialogRef = this.dialog.open(this.openUpdateDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      
+        if (result !== undefined) {
+            if (result === 'yes') {
+    
+                // console.log('User clicked yes.');
+            } else if (result === 'no') {
+
+                // console.log('User clicked no.');
+            }
+        }
+    })
+}
+
+
+ngOnDestroy(): void {
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
+}
 }
